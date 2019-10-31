@@ -31,5 +31,29 @@ public class LoginDao extends Dao{
 		}
 		return loginModel;
 	}
-
+	
+	public boolean addUser(LoginModel user,String pass) {
+		boolean isOk = false;
+		StringBuffer sb = new StringBuffer("insert into login values('");
+		sb.append(user.getId());
+		sb.append("','");
+		sb.append(user.getName());
+		sb.append("','");
+		sb.append(user.getLimit());
+		sb.append("','");
+		sb.append(pass);
+		sb.append("',';");
+		String sql = sb.toString();
+		try {
+			if(this.excuteUpdate(sql) == 1) {
+				isOk = true;
+				this.close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			isOk = false;
+		}
+		return isOk;
+	}
 }
