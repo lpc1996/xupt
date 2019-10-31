@@ -14,6 +14,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import image.Images;
+
 public class MainFrame extends JFrame {
 
 	/**
@@ -56,7 +58,7 @@ public class MainFrame extends JFrame {
 	private void initFrame(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("西安邮电大学-教务系统");
-		this.setIconImage(Toolkit.getDefaultToolkit().createImage(Login.getImgURL()));
+		this.setIconImage(new Images().getSchoolLogo());
 		this.setSize(new Dimension(800, 500));
 		this.setResizable(false);
 		this.setLocation(new Point((Toolkit.getDefaultToolkit().getScreenSize().width - 800)/2, 

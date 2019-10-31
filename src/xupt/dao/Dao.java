@@ -73,5 +73,10 @@ public class Dao {
 		}
 		
 	}
+	
+	public String[] getColumnName(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
