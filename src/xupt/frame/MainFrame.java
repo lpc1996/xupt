@@ -14,7 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import image.Images;
+import xupt.images.Images;
 
 public class MainFrame extends JFrame {
 

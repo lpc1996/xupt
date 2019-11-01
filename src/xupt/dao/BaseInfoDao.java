@@ -166,4 +166,23 @@ public class BaseInfoDao extends Dao{
 		return base;
 	}
 
+	public BaseInfoModel getUser(String id) {
+		// TODO Auto-generated method stub
+		BaseInfoModel base = null;
+		String sql = "SELECT * FROM "+tableName+" where id='"+id+"';";
+		try {
+			ResultSet rs = this.excuteQuery(sql);
+			if(rs.next()) {
+				base = (BaseInfoModel)setValue(rs);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			base = null;
+		}finally {
+			this.close();
+		}
+		return base;
+	}
+
 }

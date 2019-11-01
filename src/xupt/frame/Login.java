@@ -17,8 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import image.Images;
+
+import xupt.dao.BaseInfoDao;
 import xupt.dao.LoginDao;
+import xupt.images.Images;
 import xupt.mode.BaseInfoModel;
 import xupt.mode.LoginModel;
 
@@ -30,11 +32,9 @@ public class Login extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static BaseInfoModel user = null;
 	private static LoginModel loginModel = null;
-	private static URL imgURL = null;
 	private JButton loginBtn;
 	private JPanel cententPane;
 	private JButton exitBtn;
-	private static URL imgURL2;
 	private JTextField nameText;
 	private JPasswordField passText;
 	public LoginDao loginDao;
@@ -57,7 +57,7 @@ public class Login extends JFrame {
 		this.setResizable(false);
 		this.setTitle("»¶Ó­µÇÂ½");
 		
-		this.setIconImage(java.awt.Toolkit.getDefaultToolkit().getImage(imgURL));
+		this.setIconImage(new Images().getSchoolLogo());
 		this.setLocationRelativeTo(null);
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -131,14 +131,12 @@ public class Login extends JFrame {
 				}
 				loginModel = loginDao.login(id, pass);
 				if(loginModel != null) {
-//					BaseInfoDao baseInfoDao = new BaseInfoDao();
-//					Login.setUser(baseInfoDao.getUser(loginModel.getId()));
+					BaseInfoDao baseInfoDao = new BaseInfoDao();
+					Login.setUser(baseInfoDao.getUser(loginModel.getId()));
 					JOptionPane.showMessageDialog(getContentPane(), loginModel.getName()+"»¶Ó­");
 					dispose();
 					mainFrame = new MainFrame();
 					mainFrame.setVisible(true);
-//					mainView = new MainView();
-//					mainView.setVisible(true);
 				}else {
 					JOptionPane.showMessageDialog(getContentPane(), "ÓÃ»§Ãû»òÃÜÂë´íÎó,µÇÂ½Ê§°Ü");
 					return ;
