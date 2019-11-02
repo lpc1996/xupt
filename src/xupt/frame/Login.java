@@ -154,6 +154,11 @@ public class Login extends JFrame {
 		Login login = new Login();
 		login.setVisible(true);
 	}
+	
+	public static void reLogin() {
+		Login login = new Login();
+		login.setVisible(true);
+	}
 
 	public static BaseInfoModel getUser() {
 		return Login.user;

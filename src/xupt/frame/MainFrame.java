@@ -5,12 +5,15 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import xupt.images.Images;
@@ -151,7 +154,27 @@ public class MainFrame extends JFrame {
 			}
 		});
 		changePassItem = new JMenuItem("修改密码");
+		changeItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		logoutItem = new JMenuItem("注销登陆");
+		logoutItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int i = JOptionPane.showConfirmDialog(null, "确认要注销账户："+Login.getUser().getId() +" 吗？", "提示消息", JOptionPane.YES_NO_OPTION, 0, new ImageIcon( new Images().getWarring2() ) );
+				if(i == 0) {
+					Login.reLogin();
+					dispose();
+				}
+			}
+		});
 		exitItem = new JMenuItem("退出");
 		
 		userMenu.add(changeItem);

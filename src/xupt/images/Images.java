@@ -71,7 +71,7 @@ public class Images {
 	}
 
 	public Image getWarring2() {
-		warring2 = toolKit.getImage(this.getClass().getResource(urlPre+"warring-1.png"));
+		warring2 = toolKit.getImage(this.getClass().getResource(urlPre+"warning-1.png"));
 		return warring2;
 	}
 
