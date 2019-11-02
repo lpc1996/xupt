@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -39,6 +40,7 @@ public class Login extends JFrame {
 	private JPasswordField passText;
 	public LoginDao loginDao;
 	private static MainFrame mainFrame;
+	private static Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	/**
 	 * @throws HeadlessException
@@ -91,7 +93,7 @@ public class Login extends JFrame {
 		passText.setBounds(new Rectangle(120, 230, 124, 32));
 		
 		JLabel logoLab = new JLabel();
-		logoLab.setIcon(new ImageIcon(new Images().getBackground2()));
+		logoLab.setIcon(new ImageIcon(new Images().getLoginBG()));
 		logoLab.setBounds(new Rectangle(0, 0, 296, 150));
 		
 		getRootPane().setDefaultButton(loginBtn);
@@ -154,15 +156,20 @@ public class Login extends JFrame {
 	}
 
 	public static BaseInfoModel getUser() {
-		return user;
+		return Login.user;
 	}
 
 	public static void setUser(BaseInfoModel user) {
 		Login.user = user;
+		System.out.println(user);
 	}
 	
 	public static LoginModel getLoginModel() {
-		return loginModel;
+		return Login.loginModel;
+	}
+	
+	public static Dimension getScreenSize() {
+		return Login.ScreenSize;
 	}
 	
 	public static String getNowTime() {

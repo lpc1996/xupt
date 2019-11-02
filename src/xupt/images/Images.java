@@ -23,8 +23,6 @@ public class Images {
 	public Images() {
 		// TODO Auto-generated constructor stub
 		toolKit = Toolkit.getDefaultToolkit();
-		//urlPre = this.getClass().getClassLoader().getResource("").getPath();
-		//System.out.println(urlPre);
 	}
 
 	public Image getSchoolLogo() {
@@ -33,7 +31,7 @@ public class Images {
 	}
 
 	public Image getLoginBG() {
-		loginBG = toolKit.getImage(this.getClass().getResource(urlPre+"background1.png"));
+		loginBG = toolKit.getImage(this.getClass().getResource(urlPre+"background1.jpg"));
 		return loginBG;
 	}
 	

@@ -169,7 +169,7 @@ public class BaseInfoDao extends Dao{
 	public BaseInfoModel getUser(String id) {
 		// TODO Auto-generated method stub
 		BaseInfoModel base = null;
-		String sql = "SELECT * FROM "+tableName+" where id='"+id+"';";
+		String sql = "SELECT * FROM "+tableName+" where user_id='"+id+"';";
 		try {
 			ResultSet rs = this.excuteQuery(sql);
 			if(rs.next()) {

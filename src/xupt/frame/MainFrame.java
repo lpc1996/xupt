@@ -5,13 +5,12 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import xupt.images.Images;
@@ -26,7 +25,6 @@ public class MainFrame extends JFrame {
 	private JMenuItem changeItem;
 	private JMenuItem changePassItem;
 	private JMenuItem exitItem;
-	private BtnListener itemListener;
 	private JMenu backstageMenu;
 	private JMenuItem teacherMenu;
 	private JMenuItem studentManageItem;
@@ -48,6 +46,7 @@ public class MainFrame extends JFrame {
 	private JMenu studentMenu;
 	private JMenuItem infoSearchItem;
 	private JMenuItem courseSearchItem;
+	protected PersonalInfo personalInfo;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
@@ -61,9 +60,8 @@ public class MainFrame extends JFrame {
 		this.setIconImage(new Images().getSchoolLogo());
 		this.setSize(new Dimension(800, 500));
 		this.setResizable(false);
-		this.setLocation(new Point((Toolkit.getDefaultToolkit().getScreenSize().width - 800)/2, 
-				(Toolkit.getDefaultToolkit().getScreenSize().height-500)/2));
-		itemListener = new BtnListener();
+		this.setLocation(new Point((Login.getScreenSize().width - 800)/2, 
+				(Login.getScreenSize().height-500)/2));
 		if(Login.getLoginModel().getLimit() < 4) {
 			setJMenuBar(setStudentMenu());
 		}else if(Login.getLoginModel().getLimit() >= 4 && Login.getLoginModel().getLimit() < 7) {
@@ -74,27 +72,20 @@ public class MainFrame extends JFrame {
 		
 		JPanel contentPane = new JPanel();
 		JLabel versionLab = new JLabel();
-//		String[] version = null;
-//		try {
-//			version = new ReadFile("src\\com\\lpc\\lib\\settings\\version.ini").ReadVersion();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		versionLab.setText("<html><body><div>"+version[0]+"<br/>"+version[1]+"</div></body></html>");
-		contentPane.add(versionLab);
+		JLabel backgroundLab = new JLabel(new ImageIcon(new Images().getBackground2()));
+		contentPane.add(backgroundLab);
 		setContentPane(contentPane);
 	} 
 	
 	private JMenuBar setStudentMenu() {
 		mainMenu = new JMenuBar();
-		mainMenu.add(setPublicJMenu());
+		mainMenu.add(createUserInfoJMenu());
 		return mainMenu;
 	}
 	
 	private JMenuBar setadminMenuBar() {
 		mainMenu = new JMenuBar();
-		mainMenu.add(setPublicJMenu());
+		mainMenu.add(createUserInfoJMenu());
 		backstageMenu = new JMenu();
 		backstageMenu.setText("后台管理");
 		teacherMenu = new JMenuItem();
@@ -136,36 +127,29 @@ public class MainFrame extends JFrame {
 		mainMenu.add(settingMenu);
 		userManageItem = new JMenuItem("用户管理"); 
 		settingMenu.add(userManageItem);
-		
-		teacherMenu.addActionListener(itemListener);
-		studentManageItem.addActionListener(itemListener);
-		collegeManageItem.addActionListener(itemListener);
-		departmentItem.addActionListener(itemListener);
-		majorItem.addActionListener(itemListener);
-		schoolYearItem.addActionListener(itemListener);
-		schoolTremItem.addActionListener(itemListener);
-		semesterItem.addActionListener(itemListener);
-		xclassItem.addActionListener(itemListener);
-		coursesItem.addActionListener(itemListener);
-		offeringCoursesItem.addActionListener(itemListener);
-		studentCourseItem.addActionListener(itemListener);
-		infoSearchItem.addActionListener(itemListener);
-		courseSearchItem.addActionListener(itemListener);
-		userManageItem.addActionListener(itemListener);
 		return mainMenu;
 	}
 	
 	private JMenuBar setTeacherMenu() {
 		mainMenu = new JMenuBar();
-		mainMenu.add(setPublicJMenu());
+		mainMenu.add(createUserInfoJMenu());
 		
 		return mainMenu;
 	}
 	
-	private JMenu setPublicJMenu() {
+	private JMenu createUserInfoJMenu() {
 		userMenu = new JMenu();
 		userMenu.setText("用户信息");
-		changeItem = new JMenuItem("个人信息修改");
+		changeItem = new JMenuItem("用户信息");
+		changeItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				personalInfo = new PersonalInfo();
+				personalInfo.setVisible(true);
+			}
+		});
 		changePassItem = new JMenuItem("修改密码");
 		logoutItem = new JMenuItem("注销登陆");
 		exitItem = new JMenuItem("退出");
@@ -175,73 +159,7 @@ public class MainFrame extends JFrame {
 		userMenu.add(logoutItem);
 		userMenu.addSeparator();
 		userMenu.add(exitItem);
-		changeItem.addActionListener(itemListener);
-		changePassItem.addActionListener(itemListener);
-		logoutItem.addActionListener(itemListener);
-		exitItem.addActionListener(itemListener);
 		
 		return userMenu;
-	}
-	
-	public class BtnListener implements ActionListener{
-
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-//			if(e.getSource() == changeItem) {
-//				person = new PersonInfoChange();
-//				person.setVisible(true);
-//			}else if(e.getSource() == changePassItem) {
-//				changePass = new ChangePass();
-//				changePass.setVisible(true);
-//			}else if(e.getSource() == exitItem) {
-//				System.exit(0);
-//			}else if(e.getSource() == teacherMenu) {
-//				teacherManage = new TeacherManage();
-//				teacherManage.setVisible(true);
-//			}else if(e.getSource() == studentManageItem){
-//				studentManage = new StudentManage();
-//				studentManage.setVisible(true);
-//			}else if(e.getSource() == collegeManageItem) {
-//				collegeManage = new CollegeManage();
-//				collegeManage.setVisible(true);
-//			}else if(e.getSource() == departmentItem) {
-//				departmentManage = new DepartmentManage();
-//				departmentManage.setVisible(true);
-//			}else if(e.getSource() == majorItem) {
-//				majorManage = new MajorManage();
-//				majorManage.setVisible(true);
-//			}else if(e.getSource() == schoolYearItem) {
-//				schoolYearManage = new SchoolYearManage();
-//				schoolYearManage.setVisible(true);
-//			}else if(e.getSource() == schoolTremItem) {
-//				schoolTremManage = new SchoolTremManage();
-//				schoolTremManage.setVisible(true);
-//			}else if(e.getSource() == semesterItem) {
-//				semesterManage = new SemesterManage();
-//				semesterManage.setVisible(true);
-//			}else if(e.getSource() == logoutItem) {
-//				new Login().setVisible(true);
-//				dispose();
-//			}else if(e.getSource() == xclassItem) {
-//				 xclassManage = new XClassManage();
-//				 xclassManage.setVisible(true);
-//			}else if(e.getSource() == coursesItem){
-//				courseManage = new courseManage();
-//				courseManage.setVisible(true);
-//			}else if(e.getSource() == offeringCoursesItem ) {
-//				offeringManage = new CourseClass();
-//				offeringManage.setVisible(true);
-//			}else if(e.getSource() == studentCourseItem) {
-//				studentCourseManage = new StudentCourseManage();
-//				studentCourseManage.setVisible(true);
-//			}else if(e.getSource() == userManageItem) { 
-//				userManage = new UserManage();
-//				userManage.setVisible(true);
-//			}else if(e.getSource() == infoSearchItem) {
-//				JOptionPane.showMessageDialog(null,"功能开发中，敬请期待");
-//			}else if(e.getSource() == courseSearchItem) {
-//				JOptionPane.showMessageDialog(null,"功能开发中，敬请期待");
-//			}
-		}
 	}
 }
