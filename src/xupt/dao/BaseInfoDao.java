@@ -27,7 +27,6 @@ public class BaseInfoDao extends Dao{
 		} catch (Exception e) {
 			// TODO: handle exception
 			baseInfo=null;
-			System.out.println(sql);
 		}finally {
 			this.close();
 		}

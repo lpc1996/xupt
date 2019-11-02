@@ -50,6 +50,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem infoSearchItem;
 	private JMenuItem courseSearchItem;
 	protected PersonalInfo personalInfo;
+	protected UpdatePassWord updatePassWord;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
@@ -159,7 +160,8 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				updatePassWord = new UpdatePassWord();
+				updatePassWord.setVisible(true);
 			}
 		});
 		logoutItem = new JMenuItem("注销登陆");
@@ -176,6 +178,17 @@ public class MainFrame extends JFrame {
 			}
 		});
 		exitItem = new JMenuItem("退出");
+		exitItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				int i = JOptionPane.showConfirmDialog(null, "确认要退出吗？", "提示消息", JOptionPane.YES_NO_OPTION, 0, new ImageIcon( new Images().getWarring2() ) );
+				if(i == 0) {
+					System.exit(0);
+				}
+			}
+		});
 		
 		userMenu.add(changeItem);
 		userMenu.add(changePassItem);
