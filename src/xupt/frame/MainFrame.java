@@ -2,11 +2,8 @@ package xupt.frame;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -75,7 +72,6 @@ public class MainFrame extends JFrame {
 		}
 		
 		JPanel contentPane = new JPanel();
-		JLabel versionLab = new JLabel();
 		JLabel backgroundLab = new JLabel(new ImageIcon(new Images().getBackground2()));
 		contentPane.add(backgroundLab);
 		setContentPane(contentPane);
@@ -150,7 +146,10 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				personalInfo = new PersonalInfo();
+				if(personalInfo == null) {
+					personalInfo = new PersonalInfo();
+				}
+				personalInfo.repaint();
 				personalInfo.setVisible(true);
 			}
 		});
@@ -160,7 +159,10 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				updatePassWord = new UpdatePassWord();
+				if(updatePassWord == null) {
+					updatePassWord = new UpdatePassWord();
+				}
+				updatePassWord.repaint();
 				updatePassWord.setVisible(true);
 			}
 		});

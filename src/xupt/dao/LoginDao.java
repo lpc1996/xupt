@@ -56,4 +56,18 @@ public class LoginDao extends Dao{
 		}
 		return isOk;
 	}
+	public boolean changePass(String id, String oldPass, String newPass) {
+		// TODO Auto-generated method stub
+		boolean ok = false;
+		String sql = "update "+tableName+" set pass='"+newPass+"' where id='"+id+"' AND pass='"+oldPass+"';";
+		try {
+			if(this.excuteUpdate(sql) == 1)
+				ok = true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			this.close();
+		}
+		return ok;
+	}
 }

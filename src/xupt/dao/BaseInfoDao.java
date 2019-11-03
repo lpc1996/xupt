@@ -4,10 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import xupt.mode.BaseInfoModel;
 
 public class BaseInfoDao extends Dao{
+	
 	private final String tableName = "base_info";
 	private boolean isOk;
 

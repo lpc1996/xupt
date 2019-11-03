@@ -166,7 +166,6 @@ public class Login extends JFrame {
 
 	public static void setUser(BaseInfoModel user) {
 		Login.user = user;
-		System.out.println(user);
 	}
 	
 	public static LoginModel getLoginModel() {
