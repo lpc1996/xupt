@@ -153,7 +153,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		changePassItem = new JMenuItem("ĞŞ¸ÄÃÜÂë");
-		changeItem.addActionListener(new ActionListener() {
+		changePassItem.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
