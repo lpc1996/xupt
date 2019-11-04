@@ -24,7 +24,7 @@ public class StudentInfo extends CommonsJDialog {
 		contentPane.setLayout(flow);
 		
 		tablePane = new TablePane();
-		tablePane.setPreferredSize(new Dimension(655, 300) );
+		tablePane.setPreferredSize(new Dimension(675, 300) );
 		contentPane.add(tablePane);
 		this.setContentPane(contentPane);
 	}
