@@ -3,6 +3,10 @@ package xupt.frame;
 import java.awt.Dimension;
 import java.awt.Point;
 import javax.swing.JDialog;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import xupt.images.Images;
 
 public class CommonsJDialog extends JDialog {
@@ -25,6 +29,26 @@ public class CommonsJDialog extends JDialog {
 			this.setLocationRelativeTo(null);
 			this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		}
+	}
+	
+	class TablePane extends JScrollPane{
+		
+		private JTable table;
+
+		public TablePane() {
+			super();
+			initPane();
+		}
+		
+		private void initPane() {
+			table = new JTable();
+			this.setViewportView(table);
+		}
+		
+		public void insertData(DefaultTableModel model) {
+			table.setModel(model);
+		}
+		
 	}
 	
 }

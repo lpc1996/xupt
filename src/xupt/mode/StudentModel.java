@@ -2,6 +2,7 @@ package xupt.mode;
 
 public class StudentModel {
 	
+	private BaseInfoModel baseInfo;
 	private String id;
 	private String year;
 	private String college;
@@ -122,6 +123,14 @@ public class StudentModel {
 
 	public void setEducation(String education) {
 		this.education = education;
+	}
+
+	public BaseInfoModel getBaseInfo() {
+		return baseInfo;
+	}
+
+	public void setBaseInfo(BaseInfoModel baseInfo) {
+		this.baseInfo = baseInfo;
 	}
 
 }
