@@ -61,11 +61,13 @@ public class StudentInfo extends CommonsJDialog {
 			model.setValueAt(student.getMajor(), i, 13);
 			model.setValueAt(student.getGrade(), i, 14);
 			model.setValueAt(student.getClassId(), i, 15);
-			model.setValueAt(student.getType(), i, 16);
-			model.setValueAt(student.getEducation(), i, 17);
+			model.setValueAt(student.getCulture_level(), i, 16);
+			model.setValueAt(student.getType(), i, 17);
+			model.setValueAt(student.getEducation(), i, 18);
 			i++;
 		}
 		tablePane.setTableModel(model);
+		tablePane.setColumnWidth(80);
 	}
 	
 }

@@ -6,6 +6,8 @@ import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import xupt.images.Images;
 
@@ -41,8 +43,9 @@ public class CommonsJDialog extends JDialog {
 		}
 		
 		private void initPane() {
-			this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			table = new JTable();
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			this.setViewportView(table);
 		}
 		
@@ -60,7 +63,16 @@ public class CommonsJDialog extends JDialog {
 
 		public void setAutoResizeMode(int autoResizeAllColumns) {
 			// TODO Auto-generated method stub
-			this.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			this.setAutoResizeMode(autoResizeAllColumns);
+		}
+		
+		public void setColumnWidth(int width) {
+			TableColumnModel tableColumnModel = table.getColumnModel();
+			for(int i=0; i<tableColumnModel.getColumnCount(); i++) {
+				TableColumn column = tableColumnModel.getColumn(i);
+				column.setPreferredWidth(width);
+				column.setMinWidth(width);
+			}
 		}
 	}
 	
