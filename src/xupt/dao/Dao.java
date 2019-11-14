@@ -1,6 +1,8 @@
 package xupt.dao;
 
 import java.sql.*;
+import java.util.Vector;
+
 import javax.swing.JOptionPane;
 
 public class Dao {
@@ -9,7 +11,7 @@ public class Dao {
 	private String URL = "jdbc:mysql://localhost:3306/xupt?useSSL = false&serverTimezone=UTC&charset=UTF8&allowPublicKeyRetrieval=true&useInformationSchema=true";
 	private String USER = "root";
 	private String PASS = "1996";
-	private Connection conn;
+	protected Connection conn;
 	
 	public Dao() {
 		// TODO Auto-generated constructor stub
@@ -24,7 +26,7 @@ public class Dao {
 		refreshConnection();
 	}
 	
-	private void refreshConnection() {
+	protected void refreshConnection() {
 		try {
 			conn = DriverManager.getConnection(URL, USER, PASS);
 		} catch (Exception e) {
@@ -77,6 +79,25 @@ public class Dao {
 	public String[] getColumnName(String string) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Vector getComment(String tableName) {
+		Vector commentVes = null;
+		try {
+			if(conn.isClosed())
+				refreshConnection();
+			PreparedStatement pst = conn.prepareStatement("select * from "+tableName);
+			ResultSet re = pst.executeQuery("show full columns from " + tableName);
+			commentVes = new Vector();
+			while(re.next()) {
+				commentVes.add(re.getString("Comment"));
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return commentVes;
 	}
 
 }

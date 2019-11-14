@@ -41,14 +41,27 @@ public class CommonsJDialog extends JDialog {
 		}
 		
 		private void initPane() {
+			this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			table = new JTable();
 			this.setViewportView(table);
 		}
 		
-		public void insertData(DefaultTableModel model) {
+		public void setTableModel(DefaultTableModel model) {
 			table.setModel(model);
 		}
 		
+		public int getSelectRowCount() {
+			return table.getSelectedRowCount();
+		}
+		
+		public Object getValueAt(int row,int cloumn) {
+			return table.getValueAt(row, cloumn);
+		}
+
+		public void setAutoResizeMode(int autoResizeAllColumns) {
+			// TODO Auto-generated method stub
+			this.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		}
 	}
 	
 }

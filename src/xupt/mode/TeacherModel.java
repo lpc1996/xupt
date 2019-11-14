@@ -14,28 +14,6 @@ public class TeacherModel {
 		// TODO Auto-generated constructor stub
 		super();
 	}
-	
-	
-
-	/**
-	 * @param id
-	 * @param college
-	 * @param department
-	 * @param level
-	 * @param education
-	 * @param year
-	 */
-	public TeacherModel(String id, String college, String department, String level, String education, String year) {
-		super();
-		this.id = id;
-		this.college = college;
-		this.department = department;
-		this.level = level;
-		this.education = education;
-		this.year = year;
-	}
-
-
 
 	public String getId() {
 		return id;

@@ -18,33 +18,6 @@ public class StudentModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @param id
-	 * @param year
-	 * @param college
-	 * @param department
-	 * @param major
-	 * @param grade
-	 * @param classId
-	 * @param culture_level
-	 * @param type
-	 * @param education
-	 */
-	public StudentModel(String id, String year, String college, String department, String major, String grade,
-			String classId, String culture_level, String type, String education) {
-		super();
-		this.id = id;
-		this.year = year;
-		this.college = college;
-		this.department = department;
-		this.major = major;
-		this.grade = grade;
-		this.classId = classId;
-		this.culture_level = culture_level;
-		this.type = type;
-		this.education = education;
-	}
-
 	public String getId() {
 		return id;
 	}
