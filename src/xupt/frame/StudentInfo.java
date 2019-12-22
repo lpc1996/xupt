@@ -35,11 +35,6 @@ public class StudentInfo extends CommonsJDialog {
 	private JPanel contentPane;
 	private TablePane tablePane;
 	private JPanel btnPane;
-	private JButton insertBtn;
-	private JButton deleteBtn;
-	private JButton updateBtn;
-	private JButton refreshBtn;
-	
 	private JTextField idText;
 	private JTextField nameText;
 	private JTextField formarNameText;
@@ -76,29 +71,15 @@ public class StudentInfo extends CommonsJDialog {
 		contentPane.setLayout(flow);
 		contentPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
 		
-		tablePane = new TablePane(new Dimension(675, 440));
+		tablePane = new TablePane(new Dimension(getWidth()-10, 440));
 		contentPane.add(tablePane);
+
+		btnPane = createBtnPanel();
+		addInsertAction(insertBtnAction());
+		addUpdateAction(updateBtnAction());
+		addDeleteAction(deleteBtnAction());
+		addRefreshAction(refreshBtnAction());
 		
-		btnPane = new JPanel();
-		btnPane.setLayout(flow);
-		btnPane.setPreferredSize(new Dimension(675,40));
-		
-		insertBtn = new JButton("添加");
-		insertBtn.setPreferredSize(new Dimension(80,30));
-		insertBtnAction();
-		updateBtn = new JButton("修改");
-		updateBtn.setPreferredSize(new Dimension(80,30));
-		updateBtnAction();
-		deleteBtn = new JButton("删除");
-		deleteBtn.setPreferredSize(new Dimension(80,30));
-		deleteBtnAction();
-		refreshBtn = new JButton("刷新");
-		refreshBtn.setPreferredSize(new Dimension(80,30));
-		refreshBtnAction();
-		btnPane.add(insertBtn);
-		btnPane.add(updateBtn);
-		btnPane.add(deleteBtn);
-		btnPane.add(refreshBtn);
 		contentPane.add(btnPane);
 		
 		this.setContentPane(contentPane);
@@ -137,8 +118,8 @@ public class StudentInfo extends CommonsJDialog {
 		tablePane.setColumnWidth(80);
 	}
 	
-	private void insertBtnAction() {
-		insertBtn.addActionListener(new ActionListener() {
+	private ActionListener insertBtnAction() {
+		 ActionListener insertAction = new ActionListener() {
 			
 			private TextJDialog insertJDialog;
 			
@@ -174,12 +155,12 @@ public class StudentInfo extends CommonsJDialog {
 				});
 				insertJDialog.setVisible(true);
 			}
-			
-		});
+		};
+		return insertAction;
 	}
 	
-	private void updateBtnAction() {
-		updateBtn.addActionListener(new ActionListener() {
+	private ActionListener updateBtnAction() {
+		ActionListener updateAction = new ActionListener() {
 			
 			private TextJDialog updateJDialog;
 
@@ -219,11 +200,12 @@ public class StudentInfo extends CommonsJDialog {
 				});
 				updateJDialog.setVisible(true);
 			}
-		});
+		};
+		return updateAction;
 	}
 	
-	private void deleteBtnAction() {
-		deleteBtn.addActionListener(new ActionListener() {
+	private ActionListener deleteBtnAction() {
+		ActionListener deleteAction = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -251,12 +233,12 @@ public class StudentInfo extends CommonsJDialog {
 					}
 				}
 			}
-		});
-		
+		};
+		return deleteAction;
 	}
 	
-	private void refreshBtnAction() {
-		refreshBtn.addActionListener(new ActionListener() {
+	private ActionListener refreshBtnAction() {
+		ActionListener refreshAction = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -264,7 +246,8 @@ public class StudentInfo extends CommonsJDialog {
 				initData();
 				repaint();
 			}
-		});
+		};
+		return refreshAction;
 	}
 	
 	private JPanel initJTextPane() {

@@ -48,6 +48,7 @@ public class MainFrame extends JFrame {
 	protected PersonalInfo personalInfo;
 	protected UpdatePassWord updatePassWord;
 	protected StudentInfo studentInfo;
+	protected TeacherInfo teacherInfo;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
@@ -174,6 +175,20 @@ public class MainFrame extends JFrame {
 			}
 		});
 		backJMenu.add(studentItem);
+		JMenuItem teacherItem = new JMenuItem("教职工信息管理");
+		teacherItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(teacherInfo == null) {
+					teacherInfo = new TeacherInfo();
+				}
+				teacherInfo.repaint();
+				teacherInfo.setVisible(true);
+			}
+		});
+		backJMenu.add(teacherItem);
 		return backJMenu;
 	}
 }
