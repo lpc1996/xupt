@@ -1,8 +1,9 @@
 package xupt.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
-
 import javax.swing.JOptionPane;
 
 public class Dao {
@@ -76,19 +77,35 @@ public class Dao {
 		
 	}
 	
-	public String[] getColumnName(String string) {
+	public Vector<String> getColumnName(String tableName) {
 		// TODO Auto-generated method stub
-		return null;
+		Vector<String> columns = null;
+		String sql = "SHOW FULL COLUMNS FROM "+tableName;
+		try {
+			if(conn.isClosed()) {
+				refreshConnection();
+			}
+			ResultSet rs = this.excuteQuery(sql);
+			columns = new Vector<String>();
+			while(rs.next()) {
+				columns.add(rs.getString("FIELD"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			columns = null;
+		}finally {
+			close();
+		}
+		return columns;
 	}
 	
-	public Vector getComment(String tableName) {
-		Vector commentVes = null;
+	public Vector<String> getComment(String tableName) {
+		Vector<String> commentVes = null;
 		try {
 			if(conn.isClosed())
 				refreshConnection();
-			PreparedStatement pst = conn.prepareStatement("select * from "+tableName);
-			ResultSet re = pst.executeQuery("show full columns from " + tableName);
-			commentVes = new Vector();
+			ResultSet re = this.excuteQuery("show full columns from " + tableName);
+			commentVes = new Vector<String>();
 			while(re.next()) {
 				commentVes.add(re.getString("Comment"));
 			}
@@ -98,6 +115,39 @@ public class Dao {
 			e.printStackTrace();
 		}
 		return commentVes;
+	}
+	
+	public List<String> getIdAndNameList(String tableName) {
+		List<String> list = null;
+		String column = null;
+		if(tableName.equals("base_info")) {
+			column = "user_id,name";
+		}else {
+			column = "id,name";
+		}
+		String sql = "SELECT "+column+" FROM "+tableName+";";
+		try {
+			if(conn.isClosed()) {
+				refreshConnection();
+			}
+			ResultSet rs = this.excuteQuery(sql);
+			list = new ArrayList<String>();
+			while(rs.next()) {
+				list.add(rs.getString("id")+" "+rs.getString("name"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			list = null;
+		}finally {
+			close();
+		}
+		return list;
+	}
+	
+	public static void main(String[] argv) {
+		Dao dao = new Dao();
+		Vector<String> columns = dao.getColumnName("base_info");
+		System.out.println(columns);
 	}
 
 }

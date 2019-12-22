@@ -13,12 +13,9 @@ public class TeacherModel {
 	public TeacherModel() {
 		// TODO Auto-generated constructor stub
 		super();
+		base = new BaseInfoModel();
 	}
-
-	public String getId() {
-		return id;
-	}
-
+	
 	public String getCollege() {
 		return college;
 	}

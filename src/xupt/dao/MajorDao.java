@@ -2,9 +2,9 @@ package xupt.dao;
 
 import java.util.List;
 
-public class CollegeDao extends Dao {
+public class MajorDao extends Dao {
 	
-	private final String tableName = "college";
+	private final String tableName = "major";
 	
 	public List<String> getIdAndNameList() {
 		List<String> list = getIdAndNameList(tableName);

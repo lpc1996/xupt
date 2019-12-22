@@ -3,7 +3,6 @@ package xupt.mode;
 public class StudentModel {
 	
 	private BaseInfoModel baseInfo;
-	private String id;
 	private String year;
 	private String college;
 	private String department;
@@ -16,10 +15,7 @@ public class StudentModel {
 
 	public StudentModel() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public String getId() {
-		return id;
+		baseInfo = new BaseInfoModel();
 	}
 
 	public String getYear() {
@@ -57,11 +53,7 @@ public class StudentModel {
 	public String getEducation() {
 		return education;
 	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
+	
 	public void setYear(String year) {
 		this.year = year;
 	}

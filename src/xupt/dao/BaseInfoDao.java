@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
 import xupt.mode.BaseInfoModel;
 
 public class BaseInfoDao extends Dao{
@@ -60,12 +62,12 @@ public class BaseInfoDao extends Dao{
 		return sql;
 	}
 	
-	private List getData(String sql) {
-		List baseInfoList = null;
+	private List<BaseInfoModel> getData(String sql) {
+		List<BaseInfoModel> baseInfoList = null;
 		try {
-			String [] column = this.getColumnName("base_info");
+			Vector<String> column = this.getColumnName("base_info");
 			ResultSet rs = this.excuteQuery(sql);
-			baseInfoList = new ArrayList();
+			baseInfoList = new ArrayList<>();
 			while(rs.next()) {
 				BaseInfoModel baseInfo = (BaseInfoModel) setValue(rs);
 				if(baseInfo != null) {
@@ -120,14 +122,13 @@ public class BaseInfoDao extends Dao{
 		return isOk;
 	}
 
-	public boolean updateData(Object data, String id) {
+	public boolean updateData(BaseInfoModel data, String id) {
 		// TODO Auto-generated method stub
 		isOk = false;
-		BaseInfoModel baseInfo = (BaseInfoModel)data;
-		String sql = "update base_info set user_id='"+baseInfo.getId()+"',name='"+baseInfo.getName()
-		+"',formar_name='"+baseInfo.getFormarName()+"',sex='"+baseInfo.getSex()+"',age="+baseInfo.getAge()
-		+",native_place='"+baseInfo.getNativePlace()+"',IDCARD_type='"+baseInfo.getIDCARDTYPE()+"',IDCARD_NUM='"
-		+baseInfo.getIDCARDNUM()+"',tel='"+baseInfo.getTel()+"' where user_id='"+id+"';";
+		String sql = "update base_info set user_id='"+data.getId()+"',name='"+data.getName()
+		+"',formar_name='"+data.getFormarName()+"',sex='"+data.getSex()+"',age="+data.getAge()
+		+",native_place='"+data.getNativePlace()+"',IDCARD_type='"+data.getIDCARDTYPE()+"',IDCARD_NUM='"
+		+data.getIDCARDNUM()+"',tel='"+data.getTel()+"' where user_id='"+id+"';";
 		try {
 			if(this.excuteUpdate(sql) == 1) {
 				isOk = true;
@@ -136,6 +137,7 @@ public class BaseInfoDao extends Dao{
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			System.out.println(sql);
 			isOk = false;
 		}finally {
 			this.close();
