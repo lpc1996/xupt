@@ -8,9 +8,12 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -19,8 +22,8 @@ import xupt.dao.BaseInfoDao;
 import xupt.dao.CollegeDao;
 import xupt.dao.Dao;
 import xupt.dao.DepartmentDao;
-import xupt.dao.StudentDao;
 import xupt.dao.TeacherDao;
+import xupt.images.Images;
 import xupt.mode.TeacherModel;
 import xupt.util.DateChooser;
 import xupt.util.Tools;
@@ -54,6 +57,7 @@ public class TeacherInfo extends CommonsJDialog {
 	private JComboBox<String> levelBox;
 	private JLabel educationLab;
 	private JComboBox<String> educationBox;
+	private JButton submitBtn;
 
 	public TeacherInfo() {
 		super(new Dimension(675,550));
@@ -87,16 +91,16 @@ public class TeacherInfo extends CommonsJDialog {
 		DefaultTableModel model = new DefaultTableModel(comments, teacherList.size());
 		int i=0;
 		for(TeacherModel teacher:teacherList) {
-			model.setValueAt(teacher.getBase().getId(), i, 0);
-			model.setValueAt(teacher.getBase().getName(), i, 1);
-			model.setValueAt(teacher.getBase().getFormarName(), i, 2);
-			model.setValueAt(teacher.getBase().getSex(), i, 3);
-			model.setValueAt(teacher.getBase().getAge(), i, 4);
-			model.setValueAt(teacher.getBase().getNativePlace(), i, 5);
-			model.setValueAt(teacher.getBase().getIDCARDTYPE(), i, 6);
-			model.setValueAt(teacher.getBase().getIDCARDNUM(), i, 7);
-			model.setValueAt(teacher.getBase().getType(), i, 8);
-			model.setValueAt(teacher.getBase().getTel(), i, 9);
+			model.setValueAt(teacher.getBaseInfo().getId(), i, 0);
+			model.setValueAt(teacher.getBaseInfo().getName(), i, 1);
+			model.setValueAt(teacher.getBaseInfo().getFormarName(), i, 2);
+			model.setValueAt(teacher.getBaseInfo().getSex(), i, 3);
+			model.setValueAt(teacher.getBaseInfo().getAge(), i, 4);
+			model.setValueAt(teacher.getBaseInfo().getNativePlace(), i, 5);
+			model.setValueAt(teacher.getBaseInfo().getIDCARDTYPE(), i, 6);
+			model.setValueAt(teacher.getBaseInfo().getIDCARDNUM(), i, 7);
+			model.setValueAt(teacher.getBaseInfo().getType(), i, 8);
+			model.setValueAt(teacher.getBaseInfo().getTel(), i, 9);
 			model.setValueAt(teacher.getCollege(), i, 10);
 			model.setValueAt(teacher.getDepartment(), i, 11);
 			model.setValueAt(teacher.getLevel(), i, 12);
@@ -202,7 +206,9 @@ public class TeacherInfo extends CommonsJDialog {
 		educationBox = new JComboBox<String>();
 		educationBox.setPreferredSize(jtextSize);
 		JTextPane.add(educationBox);
-		
+		submitBtn = new JButton("提交");
+		submitBtn.setPreferredSize(jlabelSize);
+		JTextPane.add(submitBtn);
 		return JTextPane;
 	}
 	
@@ -241,6 +247,79 @@ public class TeacherInfo extends CommonsJDialog {
 		}
 	}
 	
+	private TeacherModel getData() {
+		Tools tool = new Tools();
+		TeacherModel teacher = new TeacherModel();
+		if(idText.getText().length() > 0) {
+			teacher.getBaseInfo().setId(idText.getText());
+		}else {
+			JOptionPane.showMessageDialog(null, "请输入学号！", "警告", JOptionPane.ERROR_MESSAGE, 
+					new ImageIcon(new Images().getError2()));
+			return null;
+		}
+		if(nameText.getText().length() > 0) {
+			teacher.getBaseInfo().setName(nameText.getText());
+		}else {
+			JOptionPane.showMessageDialog(null, "请输入姓名！", "警告", JOptionPane.ERROR_MESSAGE, 
+					new ImageIcon(new Images().getError2()));
+			return null;
+		}
+		if(formarNameText.getText().length() > 0) {
+			teacher.getBaseInfo().setFormarName(formarNameText.getText());
+		}else {
+			JOptionPane.showMessageDialog(null, "请输入曾用名，如果没有请输入无！", "警告", 
+					JOptionPane.ERROR_MESSAGE, new ImageIcon(new Images().getError2()));
+			return null;
+		}
+		teacher.getBaseInfo().setSex(tool.Split( (String) sexComBox.getSelectedItem() ));
+		try {
+			teacher.getBaseInfo().setAge(Integer.parseInt( ageText.getText() ));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "请输入正确的年龄！", "警告", JOptionPane.ERROR_MESSAGE, 
+					new ImageIcon(new Images().getError2()));
+			return null;
+		}
+		if(nativePlaceText.getText().length() > 0) {
+			teacher.getBaseInfo().setNativePlace(nativePlaceText.getText());
+		}else {
+			JOptionPane.showMessageDialog(null, "请输入籍贯！", "警告", JOptionPane.ERROR_MESSAGE, 
+					new ImageIcon(new Images().getError2()));
+			return null;
+		}
+		
+		teacher.getBaseInfo().setIDCARDTYPE(tool.Split( (String) idCardTypeComBox.getSelectedItem() ));
+		if(idCardNumText.getText().length() > 0) {
+			teacher.getBaseInfo().setIDCARDNUM(idCardNumText.getText());
+		}else {
+			JOptionPane.showMessageDialog(null, "请输入证件号码！", "警告", JOptionPane.ERROR_MESSAGE,
+					new ImageIcon(new Images().getError2()));
+			return null;
+		}
+		
+		teacher.getBaseInfo().setType("teacher");
+		if(telText.getText().length() > 0) {
+			teacher.getBaseInfo().setTel(telText.getText());
+		}else {
+			JOptionPane.showMessageDialog(null, "请输入电话号码！", "警告", JOptionPane.ERROR_MESSAGE, 
+					new ImageIcon(new Images().getError2()));
+			return null;
+		}
+		if(yearText.getText().length() > 0) {
+			teacher.setYear(yearText.getText());
+		}else {
+			JOptionPane.showMessageDialog(null, "请选择入职时间！", "警告", JOptionPane.ERROR_MESSAGE,
+					new ImageIcon(new Images().getError2()));
+			return null;
+		}
+		teacher.setCollege(tool.Split(collegeBox.getSelectedItem()+""));
+		teacher.setDepartment(tool.Split(departmentBox.getSelectedItem()+""));
+		teacher.setLevel(levelBox.getSelectedItem()+"");
+		teacher.setEducation(educationBox.getSelectedItem()+"");
+		
+		return teacher;
+	}
+	
 	private ActionListener insertBtnAction() {
 		ActionListener insertAction = new ActionListener() {
 			
@@ -251,6 +330,29 @@ public class TeacherInfo extends CommonsJDialog {
 				insertJDialog.setTitle("添加教师信息");
 				insertJDialog.setContentPane(initJTextPane());
 				initComBox();
+				submitBtn.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						TeacherModel teacher = getData();
+						if(teacher == null) {
+							return;
+						}
+						TeacherDao teacherDao = new TeacherDao();
+						if(teacherDao.insertData(teacher)) {
+							JOptionPane.showMessageDialog(null, "添加成功！", "温馨提示",
+									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
+							initData();
+							contentPane.repaint();
+							insertJDialog.dispose();
+						}else {
+							JOptionPane.showMessageDialog(null, "添加失败！", "提示消息",
+									JOptionPane.ERROR_MESSAGE, new ImageIcon(new Images().getError2()));
+							return;
+						}
+					}
+				});
 				insertJDialog.setVisible(true);
 			}
 		};

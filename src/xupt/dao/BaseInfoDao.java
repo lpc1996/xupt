@@ -101,15 +101,12 @@ public class BaseInfoDao extends Dao{
 		return isOk;
 	}
 
-	public boolean addData(Object data) {
+	public boolean insertData(BaseInfoModel data) {
 		// TODO Auto-generated method stub
 		isOk = false;
-		BaseInfoModel baseInfoModel = (BaseInfoModel)data;
-		String sql = "INSERT INTO base_info values(null,'"+baseInfoModel.getId()+"','"
-		+baseInfoModel.getName()+"','"+baseInfoModel.getFormarName()+"','"+	baseInfoModel.getSex()+"',"
-				+baseInfoModel.getAge()+",'"+baseInfoModel.getNativePlace()+"','"+baseInfoModel.getIDCARDTYPE()
-				+"','"+baseInfoModel.getIDCARDNUM()+"','"+baseInfoModel.getType()+"','"
-				+baseInfoModel.getTel()+"');";
+		String sql = "INSERT INTO base_info values(null,'"+data.getId()+"','"+data.getName()+"','"
+		+data.getFormarName()+"','"+	data.getSex()+"',"+data.getAge()+",'"+data.getNativePlace()+"','"
+				+data.getIDCARDTYPE()+"','"+data.getIDCARDNUM()+"','"+data.getType()+"','"+data.getTel()+"');";
 		try {
 			if(this.excuteUpdate(sql) == 1) {
 				isOk = true;

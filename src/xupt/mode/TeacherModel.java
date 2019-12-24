@@ -3,7 +3,6 @@ package xupt.mode;
 public class TeacherModel {
 	
 	private BaseInfoModel base;
-	private String id;
 	private String college;
 	private String department;
 	private String level;
@@ -35,11 +34,7 @@ public class TeacherModel {
 	public String getYear() {
 		return year;
 	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
+	
 	public void setCollege(String college) {
 		this.college = college;
 	}
@@ -60,11 +55,11 @@ public class TeacherModel {
 		this.year = year;
 	}
 
-	public BaseInfoModel getBase() {
+	public BaseInfoModel getBaseInfo() {
 		return base;
 	}
 
-	public void setBase(BaseInfoModel base) {
+	public void setBaseInfo(BaseInfoModel base) {
 		this.base = base;
 	}
 

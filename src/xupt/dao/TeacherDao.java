@@ -40,16 +40,16 @@ public class TeacherDao extends Dao {
 		TeacherModel teacher = null;
 		try {
 			teacher = new TeacherModel();
-			teacher.getBase().setId(rs.getString("user_id"));
-			teacher.getBase().setName(rs.getString("name"));
-			teacher.getBase().setFormarName(rs.getString("formar_name"));
-			teacher.getBase().setSex(rs.getString("sex"));
-			teacher.getBase().setAge(rs.getInt("age"));
-			teacher.getBase().setNativePlace(rs.getString("native_place"));
-			teacher.getBase().setIDCARDTYPE(rs.getString("IDCARD_type"));
-			teacher.getBase().setIDCARDNUM(rs.getString("IDCARD_NUM"));
-			teacher.getBase().setType(rs.getString("user_type"));
-			teacher.getBase().setTel(rs.getString("tel"));
+			teacher.getBaseInfo().setId(rs.getString("user_id"));
+			teacher.getBaseInfo().setName(rs.getString("name"));
+			teacher.getBaseInfo().setFormarName(rs.getString("formar_name"));
+			teacher.getBaseInfo().setSex(rs.getString("sex"));
+			teacher.getBaseInfo().setAge(rs.getInt("age"));
+			teacher.getBaseInfo().setNativePlace(rs.getString("native_place"));
+			teacher.getBaseInfo().setIDCARDTYPE(rs.getString("IDCARD_type"));
+			teacher.getBaseInfo().setIDCARDNUM(rs.getString("IDCARD_NUM"));
+			teacher.getBaseInfo().setType(rs.getString("user_type"));
+			teacher.getBaseInfo().setTel(rs.getString("tel"));
 			teacher.setCollege(rs.getString("college"));
 			teacher.setDepartment(rs.getString("department"));
 			teacher.setLevel(rs.getString("level"));
@@ -61,6 +61,27 @@ public class TeacherDao extends Dao {
 			teacher = null;
 		}
 		return teacher;
+	}
+	
+	public boolean insertData(TeacherModel teacher) {
+		boolean result = false;
+		String sql = "INSERT INTO teacher VALUES('"+teacher.getBaseInfo().getId()+"','"+teacher.getCollege()
+		+"','"+teacher.getDepartment()+"','"+teacher.getLevel()+"','"+teacher.getEducation()+"','"
+				+teacher.getYear()+"');";
+		try {
+			if(new BaseInfoDao().insertData(teacher.getBaseInfo())) {
+				if(this.excuteUpdate(sql) == 1) {
+					result = true;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(sql);
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return result;
 	}
 	
 	public Vector<String> getComments(){

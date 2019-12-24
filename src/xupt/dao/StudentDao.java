@@ -82,7 +82,7 @@ public class StudentDao extends Dao {
 				data.getBaseInfo().getId()+"','"+data.getYear()+"','"+data.getCollege()+"','"+data.getDepartment()+"','"+data.getMajor()+"','"+data.getGrade()+"','"
 				 +data.getClassId()+"','"+data.getCulture_level()+"','"+data.getType()+"','"+data.getEducation()+"');";
 		try {
-			if( new BaseInfoDao().addData((Object)data.getBaseInfo()) ) {
+			if( new BaseInfoDao().insertData(data.getBaseInfo()) ) {
 				if(this.excuteUpdate(sql1) == 1){
 					result = true;
 				}
