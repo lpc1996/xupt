@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Vector;
 
 import xupt.mode.BaseInfoModel;
+import xupt.util.Tools;
 
 public class BaseInfoDao extends Dao{
 	
@@ -184,6 +185,32 @@ public class BaseInfoDao extends Dao{
 			this.close();
 		}
 		return base;
+	}
+	
+	//获取字段类型为enum的字段所有可能的类型值
+	public List<String> getEnumValue(String columnName){
+		List<String> enumValue = null;
+		String sql = "SELECT column_type FROM information_schema.COLUMNS WHERE TABLE_SCHEMA="
+				+ "'xupt' AND DATA_TYPE='enum' AND TABLE_NAME='"+tableName+"' AND COLUMN_NAME='"+columnName+
+				"';";
+		try {
+			ResultSet rs = this.excuteQuery(sql);
+			if(rs.next()) {
+				enumValue = new Tools().splitEnumValue(rs.getString(1));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			this.close();
+		}
+		return enumValue;
+	}
+	
+	public static void main(String[] argv) {
+		BaseInfoDao baseDao = new BaseInfoDao();
+		System.out.println(baseDao.getEnumValue("sex"));
+		
 	}
 
 }

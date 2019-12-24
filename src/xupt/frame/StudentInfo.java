@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import xupt.dao.ClassDao;
 import xupt.dao.CollegeDao;
+import xupt.dao.Dao;
 import xupt.dao.DepartmentDao;
 import xupt.dao.MajorDao;
 import xupt.dao.SemesterDao;
@@ -381,46 +382,53 @@ public class StudentInfo extends CommonsJDialog {
 	
 	private void initComBox() {
 		
-		sexComBox.addItem("男");
-		sexComBox.addItem("女");
-		sexComBox.addItem("保密");
+		Dao dao = new Dao();
+		String tableName = "base_student";
+		List<String> value = dao.getEnumValue(tableName,"sex");
+		for(int i=0; i < value.size(); i++) {
+			sexComBox.addItem(value.get(i));
+		}
+		value = null;
+		value = dao.getEnumValue(tableName,"IDCARD_type");
+		for(int i=0; i < value.size(); i++) {
+			idCardTypeComBox.addItem(value.get(i));
+		}
+		value = null;
+		value = new CollegeDao().getIdAndNameList();
+		for(int i=0; i<value.size(); i++) {
+			collegeComBox.addItem(	value.get(i) );
+		}
+		value = null;
+		value = new DepartmentDao().getIdAndNameList();
+		for(int i=0; i<value.size(); i++) {
+			departmentBox.addItem(value.get(i));
+		}
+		value = null;
+		value = new MajorDao().getIdAndNameList();
+		for(int i=0; i<value.size(); i++) {
+			majorBox.addItem(value.get(i));
+		}
+		value = null;
+		value = new SemesterDao().getIdAndNameList();
+		for(int i=0; i<value.size(); i++) {
+			gradeBox.addItem(value.get(i));
+		}
+		value = null;
+		value = new ClassDao().getIdAndNameList();
+		for(int i=0; i<value.size(); i++) {
+			classBox.addItem(value.get(i));
+		}
 		
-		idCardTypeComBox.addItem("居民身份证");
-		
-		List<String> list = new CollegeDao().getIdAndNameList();
-		for(int i=0; i<list.size(); i++) {
-			collegeComBox.addItem(	list.get(i) );
+		value = null;
+		value = dao.getEnumValue(tableName, "culture_level");
+		for(int i=0; i< value.size(); i++) {
+			cultureLevelBox.addItem(value.get(i));
 		}
-		list = null;
-		list = new DepartmentDao().getIdAndNameList();
-		for(int i=0; i<list.size(); i++) {
-			departmentBox.addItem(list.get(i));
+		value = null;
+		value = dao.getEnumValue(tableName, "student_type");
+		for(int i=0; i <value.size(); i++) {
+			studentTypeBox.addItem(value.get(i));
 		}
-		list = null;
-		list = new MajorDao().getIdAndNameList();
-		for(int i=0; i<list.size(); i++) {
-			majorBox.addItem(list.get(i));
-		}
-		list = null;
-		list = new SemesterDao().getIdAndNameList();
-		for(int i=0; i<list.size(); i++) {
-			gradeBox.addItem(list.get(i));
-		}
-		list = null;
-		list = new ClassDao().getIdAndNameList();
-		for(int i=0; i<list.size(); i++) {
-			classBox.addItem(list.get(i));
-		}
-		
-		cultureLevelBox.addItem("专科");
-		cultureLevelBox.addItem("本科");
-		cultureLevelBox.addItem("硕士");
-		cultureLevelBox.addItem("博士");
-		
-		studentTypeBox.addItem("普通专科生");
-		studentTypeBox.addItem("普通本科生");
-		studentTypeBox.addItem("普通硕士生");
-		studentTypeBox.addItem("博士生");
 		
 	}
 	
