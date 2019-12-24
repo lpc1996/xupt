@@ -119,6 +119,39 @@ public class StudentInfo extends CommonsJDialog {
 		tablePane.setColumnWidth(80);
 	}
 	
+	public StudentModel getSelectData() {
+		/*
+		 * 获取表格中被选中行的数据
+		 */
+		int row = tablePane.getSelectRow();
+		StudentModel student = null;
+		if(row != -1) {
+			student = new StudentModel();
+			student.getBaseInfo().setId( (String)tablePane.getValueAt(row, 0));
+			student.getBaseInfo().setName((String)tablePane.getValueAt(row, 1));
+			student.getBaseInfo().setFormarName((String)tablePane.getValueAt(row, 2));
+			student.getBaseInfo().setSex((String)tablePane.getValueAt(row, 3));
+			student.getBaseInfo().setAge(Integer.parseInt(tablePane.getValueAt(row, 4)+"") );
+			student.getBaseInfo().setNativePlace((String)tablePane.getValueAt(row, 5));
+			student.getBaseInfo().setIDCARDTYPE((String)tablePane.getValueAt(row, 6));
+			student.getBaseInfo().setIDCARDNUM((String)tablePane.getValueAt(row, 7));
+			student.getBaseInfo().setType((String)tablePane.getValueAt(row, 8));
+			student.getBaseInfo().setTel((String)tablePane.getValueAt(row, 9));
+			student.setYear((String)tablePane.getValueAt(row, 10));
+			student.setCollege((String)tablePane.getValueAt(row, 11));
+			student.setDepartment((String)tablePane.getValueAt(row, 12));
+			student.setMajor((String)tablePane.getValueAt(row, 13));
+			student.setGrade((String)tablePane.getValueAt(row, 14));
+			student.setClassId((String)tablePane.getValueAt(row, 15));
+			student.setCulture_level((String)tablePane.getValueAt(row, 16));
+			student.setType((String)tablePane.getValueAt(row, 17));
+			student.setEducation((String)tablePane.getValueAt(row, 18));
+		}else {
+			student = null;
+		}
+		return student;
+	}
+	
 	private ActionListener insertBtnAction() {
 		 ActionListener insertAction = new ActionListener() {
 			
@@ -172,7 +205,7 @@ public class StudentInfo extends CommonsJDialog {
 				updateJDialog.setTitle("修改学生信息");
 				updateJDialog.setContentPane(initJTextPane());
 				initComBox();
-				StudentModel data = tablePane.getSelectData();
+				StudentModel data = getSelectData();
 				if(data == null) {
 					JOptionPane.showMessageDialog(null, "你没有选中一行数据！", "错误", 
 							JOptionPane.ERROR_MESSAGE, new ImageIcon(new Images().getError2()));

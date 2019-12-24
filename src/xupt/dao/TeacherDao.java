@@ -88,4 +88,46 @@ public class TeacherDao extends Dao {
 		return getComment(viewName);
 	}
 
+	public boolean updateData(TeacherModel data, String id) {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		String sql = "UPDATE "+tableName+" SET id='"+data.getBaseInfo().getId()+"',college='"
+		+data.getCollege()+"',department='"+data.getDepartment()+"',level='"+data.getLevel()+"',education='"
+				+data.getEducation()+"',year='"+data.getYear()+"' WHERE id='"+id+"';";
+		try {
+			if(new BaseInfoDao().updateData(data.getBaseInfo(), id)) {
+				if(this.excuteUpdate(sql) == 1) {
+					result = true;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(sql);
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return result;
+	}
+
+	public boolean deleteData(String id) {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM "+tableName+" WHERE id='"+id+"'";
+		boolean result = false;
+		try {
+			if(new BaseInfoDao().deleteData(id)) {
+				if(this.excuteUpdate(sql) == 1) {
+					result = true;
+				}
+			}
+		}catch (Exception e){
+			System.out.println(sql);
+			e.printStackTrace();
+		} finally {
+			// TODO: handle finally clause
+			close();
+		}
+		return result;
+	}
+
 }
