@@ -214,39 +214,6 @@ public class CommonsJDialog extends JDialog {
 			table.setRowSelectionInterval(row, row);
 		}
 		
-		public StudentModel getSelectData() {
-			/*
-			 * 获取表格中被选中行的数据
-			 */
-			int row = getSelectRow();
-			StudentModel student = null;
-			if(row != -1) {
-				student = new StudentModel();
-				student.getBaseInfo().setId( (String)getValueAt(row, 0));
-				student.getBaseInfo().setName((String)getValueAt(row, 1));
-				student.getBaseInfo().setFormarName((String)getValueAt(row, 2));
-				student.getBaseInfo().setSex((String)getValueAt(row, 3));
-				student.getBaseInfo().setAge(Integer.parseInt(getValueAt(row, 4)+"") );
-				student.getBaseInfo().setNativePlace((String)getValueAt(row, 5));
-				student.getBaseInfo().setIDCARDTYPE((String)getValueAt(row, 6));
-				student.getBaseInfo().setIDCARDNUM((String)getValueAt(row, 7));
-				student.getBaseInfo().setType((String)getValueAt(row, 8));
-				student.getBaseInfo().setTel((String)getValueAt(row, 9));
-				student.setYear((String)getValueAt(row, 10));
-				student.setCollege((String)getValueAt(row, 11));
-				student.setDepartment((String)getValueAt(row, 12));
-				student.setMajor((String)getValueAt(row, 13));
-				student.setGrade((String)getValueAt(row, 14));
-				student.setClassId((String)getValueAt(row, 15));
-				student.setCulture_level((String)getValueAt(row, 16));
-				student.setType((String)getValueAt(row, 17));
-				student.setEducation((String)getValueAt(row, 18));
-			}else {
-				student = null;
-			}
-			return student;
-		}
-		
 		private void addSearchBtnAction() {
 			/*
 			 * 为查询组件注册监听器

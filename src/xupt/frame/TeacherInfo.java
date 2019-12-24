@@ -1,6 +1,5 @@
 package xupt.frame;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -11,14 +10,11 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-import xupt.dao.BaseInfoDao;
 import xupt.dao.CollegeDao;
 import xupt.dao.Dao;
 import xupt.dao.DepartmentDao;
@@ -34,7 +30,6 @@ public class TeacherInfo extends CommonsJDialog {
 	 * 教职工信息管理
 	 */
 	private static final long serialVersionUID = 1L;
-	private Tools tool;
 	private JPanel contentPane;
 	private TablePane tablePane;
 	private JPanel btnPanel;
@@ -63,7 +58,6 @@ public class TeacherInfo extends CommonsJDialog {
 		super(new Dimension(675,550));
 		// TODO Auto-generated constructor stub
 		 setTitle("教职工信息管理");
-		 tool = new Tools();
 		 initContentPane();
 		 initData();
 	}
@@ -79,6 +73,9 @@ public class TeacherInfo extends CommonsJDialog {
 		
 		btnPanel = createBtnPanel();
 		addInsertAction(insertBtnAction());
+		addUpdateAction(updateBtnAction());
+		addDeleteAction(deleteBtnAction());
+		addRefreshAction(refreshBtnAction());
 		
 		contentPane.add(btnPanel);
 		this.setContentPane(contentPane);
@@ -206,9 +203,13 @@ public class TeacherInfo extends CommonsJDialog {
 		educationBox = new JComboBox<String>();
 		educationBox.setPreferredSize(jtextSize);
 		JTextPane.add(educationBox);
+		JPanel btnPanel = new JPanel();
+		btnPanel.setPreferredSize(new Dimension(tablePane.getWidth(),40));
+		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		submitBtn = new JButton("提交");
 		submitBtn.setPreferredSize(jlabelSize);
-		JTextPane.add(submitBtn);
+		btnPanel.add(submitBtn);
+		JTextPane.add(btnPanel);
 		return JTextPane;
 	}
 	
@@ -320,6 +321,49 @@ public class TeacherInfo extends CommonsJDialog {
 		return teacher;
 	}
 	
+	private void setData(TeacherModel data) {
+		Tools tool = new Tools();
+		idText.setText(data.getBaseInfo().getId());
+		nameText.setText(data.getBaseInfo().getName());
+		nativePlaceText.setText(data.getBaseInfo().getNativePlace());
+		formarNameText.setText(data.getBaseInfo().getFormarName());
+		tool.setSelectedItem(sexComBox, data.getBaseInfo().getSex());
+		ageText.setText(data.getBaseInfo().getAge()+"");
+		tool.setSelectedItem(idCardTypeComBox, data.getBaseInfo().getIDCARDTYPE());
+		idCardNumText.setText(data.getBaseInfo().getIDCARDNUM());
+		telText.setText(data.getBaseInfo().getTel());
+		yearText.setText(data.getYear());
+		tool.setSelectedItem(collegeBox, data.getCollege());
+		tool.setSelectedItem(departmentBox, data.getDepartment());
+		levelBox.setSelectedItem(data.getLevel());
+		educationBox.setSelectedItem(data.getEducation());
+	}
+	
+	private TeacherModel getSelectData() {
+		// TODO Auto-generated method stub
+		TeacherModel data = null;
+		int row = tablePane.getSelectRow();
+		if(row != -1) {
+			data = new TeacherModel();
+			data.getBaseInfo().setId( (String)tablePane.getValueAt(row, 0));
+			data.getBaseInfo().setName((String)tablePane.getValueAt(row, 1));
+			data.getBaseInfo().setFormarName((String)tablePane.getValueAt(row, 2));
+			data.getBaseInfo().setSex((String)tablePane.getValueAt(row, 3));
+			data.getBaseInfo().setAge(Integer.parseInt(tablePane.getValueAt(row, 4)+"") );
+			data.getBaseInfo().setNativePlace((String)tablePane.getValueAt(row, 5));
+			data.getBaseInfo().setIDCARDTYPE((String)tablePane.getValueAt(row, 6));
+			data.getBaseInfo().setIDCARDNUM((String)tablePane.getValueAt(row, 7));
+			data.getBaseInfo().setType((String)tablePane.getValueAt(row, 8));
+			data.getBaseInfo().setTel((String)tablePane.getValueAt(row, 9));
+			data.setCollege(tablePane.getValueAt(row, 10)+"");
+			data.setDepartment(tablePane.getValueAt(row, 11)+"");
+			data.setLevel(tablePane.getValueAt(row, 12)+"");
+			data.setEducation(tablePane.getValueAt(row, 13)+"");
+			data.setYear(tablePane.getValueAt(row, 14)+"");
+		}
+		return data;
+	}
+	
 	private ActionListener insertBtnAction() {
 		ActionListener insertAction = new ActionListener() {
 			
@@ -359,7 +403,96 @@ public class TeacherInfo extends CommonsJDialog {
 		return insertAction;
 	}
 	
+	private ActionListener updateBtnAction() {
+		ActionListener updateAction = new ActionListener() {
+			
+			private TextJDialog updateJDialog;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				updateJDialog = new TextJDialog(new Dimension(630,450));
+				updateJDialog.setTitle("修改学生信息");
+				updateJDialog.setContentPane(initJTextPane());
+				initComBox();
+				TeacherModel data = getSelectData();
+				if(data == null) {
+					JOptionPane.showMessageDialog(null, "你没有选中一行数据！", "错误", 
+							JOptionPane.ERROR_MESSAGE, new ImageIcon(new Images().getError2()));
+					return ;
+				}
+				setData(data);
+				submitBtn.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						TeacherModel data = getData();
+						TeacherDao teacherDao = new TeacherDao();
+						if(teacherDao.updateData(data, data.getBaseInfo().getId())) {
+							JOptionPane.showMessageDialog(null, "修改成功！", "温馨提示", 
+									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
+							initData();
+							contentPane.repaint();
+							updateJDialog.dispose();
+						}else {
+							JOptionPane.showMessageDialog(null, "修改失败！", "提示消息",
+									JOptionPane.ERROR_MESSAGE, new ImageIcon(new Images().getError2()));
+							return;
+						}
+					}
+				});
+				updateJDialog.setVisible(true);
+			}
+		};
+		return updateAction;
+	}
 	
+	private ActionListener deleteBtnAction() {
+		ActionListener deleteAction = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int i = tablePane.getSelectRow();
+				if( i == -1) {
+					JOptionPane.showMessageDialog(null, "你没有选中一行数据！", "错误", 
+							JOptionPane.ERROR_MESSAGE, new ImageIcon(new Images().getError2()));
+					return ;
+				}
+				if(JOptionPane.showConfirmDialog(null, "确定要删除职工号为："+tablePane.getValueAt(i, 0)
+				+"的教师吗？", "温馨提示", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, 
+				new ImageIcon(new Images().getWarring2())) == 0) {
+					TeacherDao teacherDao = new TeacherDao();
+					if(teacherDao.deleteData((String)tablePane.getValueAt(i, 0))) {
+						JOptionPane.showMessageDialog(null, "职工号为："+tablePane.getValueAt(i, 0)+
+								"的教师信息已删除！", "温馨提示", JOptionPane.INFORMATION_MESSAGE, 
+								new ImageIcon(new Images().getYes2()));
+						initData();
+						repaint();
+					}else {
+						JOptionPane.showMessageDialog(null, "删除失败！", "错误", JOptionPane.ERROR_MESSAGE,
+								new ImageIcon(new Images().getError2()));
+						
+					}
+				}
+			}
+		};
+		return deleteAction;
+	}
+	
+	private ActionListener refreshBtnAction() {
+		ActionListener refreshAction = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				initData();
+				repaint();
+			}
+		};
+		return refreshAction;
+	}
 	
 }
 
