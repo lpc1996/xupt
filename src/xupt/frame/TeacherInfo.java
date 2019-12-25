@@ -206,7 +206,7 @@ public class TeacherInfo extends CommonsJDialog {
 		JPanel btnPanel = new JPanel();
 		btnPanel.setPreferredSize(new Dimension(tablePane.getWidth(),40));
 		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		submitBtn = new JButton("提交");
+		submitBtn = new JButton("提交"); 
 		submitBtn.setPreferredSize(jlabelSize);
 		btnPanel.add(submitBtn);
 		JTextPane.add(btnPanel);
