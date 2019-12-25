@@ -71,6 +71,7 @@ public class StudentDao extends Dao {
 	}
 	
 	public Vector<String> getComments() {
+		//从表中抓取字段注释
 		Vector<String> comments = null;
 		comments= getComment("Base_Student");
 		return comments;

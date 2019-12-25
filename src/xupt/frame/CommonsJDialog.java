@@ -31,6 +31,8 @@ public class CommonsJDialog extends JDialog {
 	private JButton updateBtn;
 	private JButton deleteBtn;
 	private JButton refreshBtn;
+	public final Dimension jlabelSize = new Dimension(80, 30);
+	public final Dimension jtextSize = new Dimension(200, 30);
 	
 	/**
 	 * ¹¹Ôìº¯Êý

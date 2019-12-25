@@ -106,111 +106,111 @@ public class TeacherInfo extends CommonsJDialog {
 			i++;
 		}
 		tablePane.setTableModel(model);
-		tablePane.setColumnWidth(60);
+		tablePane.setColumnWidth(80);
 	}
 	
 	private JPanel initJTextPane() {
-		JPanel JTextPane = new JPanel();
+		JPanel textPane = new JPanel();
 		FlowLayout flow = new FlowLayout(FlowLayout.LEFT, 5, 5);
-		JTextPane.setLayout(flow);
-		JTextPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
+		textPane.setLayout(flow);
+		textPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
 		Dimension jlabelSize = new Dimension(80, 30);
 		Dimension jtextSize = new Dimension(200, 30);
-		JLabel idLab = new JLabel("学号：");
+		JLabel idLab = new JLabel("教职工号：");
 		idLab.setPreferredSize(jlabelSize);
-		JTextPane.add(idLab);
+		textPane.add(idLab);
 		idText = new JTextField();
 		idText.setPreferredSize(jtextSize);
-		JTextPane.add(idText);
+		textPane.add(idText);
 		JLabel nameLab = new JLabel("姓名：");
 		nameLab.setPreferredSize(jlabelSize);
-		JTextPane.add(nameLab);
+		textPane.add(nameLab);
 		nameText = new JTextField();
 		nameText.setPreferredSize(jtextSize);
-		JTextPane.add(nameText);
+		textPane.add(nameText);
 		JLabel formarNameLab = new JLabel("曾用名：");
 		formarNameLab.setPreferredSize(jlabelSize);
-		JTextPane.add(formarNameLab);
+		textPane.add(formarNameLab);
 		formarNameText = new JTextField();
 		formarNameText.setPreferredSize(jtextSize);
-		JTextPane.add(formarNameText);
+		textPane.add(formarNameText);
 		JLabel sexLab = new JLabel("性别：");
 		sexLab.setPreferredSize(jlabelSize);
-		JTextPane.add(sexLab);
+		textPane.add(sexLab);
 		sexComBox = new JComboBox<String>();
 		sexComBox.setPreferredSize(jtextSize);
-		JTextPane.add(sexComBox);
+		textPane.add(sexComBox);
 		JLabel ageLab = new JLabel("年龄：");
 		ageLab.setPreferredSize(jlabelSize);
-		JTextPane.add(ageLab);
+		textPane.add(ageLab);
 		ageText = new JTextField();
 		ageText.setPreferredSize(jtextSize);
-		JTextPane.add(ageText);
+		textPane.add(ageText);
 		JLabel nativePlaceLab = new JLabel("籍贯：");
 		nativePlaceLab.setPreferredSize(jlabelSize);
-		JTextPane.add(nativePlaceLab);
+		textPane.add(nativePlaceLab);
 		nativePlaceText = new JTextField();
 		nativePlaceText.setPreferredSize(jtextSize);
-		JTextPane.add(nativePlaceText);
+		textPane.add(nativePlaceText);
 		JLabel idCardTypeLab = new JLabel("证件类型：");
 		idCardTypeLab.setPreferredSize(jlabelSize);
-		JTextPane.add(idCardTypeLab);
+		textPane.add(idCardTypeLab);
 		idCardTypeComBox = new JComboBox<String>();
 		idCardTypeComBox.setPreferredSize(jtextSize);		
-		JTextPane.add(idCardTypeComBox);
+		textPane.add(idCardTypeComBox);
 		JLabel idCardNumLab = new JLabel("证件号码：");
 		idCardNumLab.setPreferredSize(jlabelSize);
-		JTextPane.add(idCardNumLab);
+		textPane.add(idCardNumLab);
 		idCardNumText = new JTextField();
 		idCardNumText.setPreferredSize(jtextSize);
-		JTextPane.add(idCardNumText);
+		textPane.add(idCardNumText);
 		JLabel telLab = new JLabel("联系方式：");
 		telLab.setPreferredSize(jlabelSize);
-		JTextPane.add(telLab);
+		textPane.add(telLab);
 		telText = new JTextField();
 		telText.setPreferredSize(jtextSize);
-		JTextPane.add(telText);
+		textPane.add(telText);
 		
 		yearLab = new JLabel("入职时间:");
 		yearLab.setPreferredSize(jlabelSize);
-		JTextPane.add(yearLab);
+		textPane.add(yearLab);
 		yearText = new JTextField();
 		DateChooser dc = DateChooser.getInstance("yyyy-MM-dd");
 		dc.register(yearText);
 		yearText.setPreferredSize(jtextSize);
-		JTextPane.add(yearText);
+		textPane.add(yearText);
 		collegeLab = new JLabel("所属学院：");
 		collegeLab.setPreferredSize(jlabelSize);
-		JTextPane.add(collegeLab);
+		textPane.add(collegeLab);
 		collegeBox = new JComboBox<String>();
 		collegeBox.setPreferredSize(jtextSize);
-		JTextPane.add(collegeBox);
+		textPane.add(collegeBox);
 		departmentLab = new JLabel("所属系/部：");
 		departmentLab.setPreferredSize(jlabelSize);
-		JTextPane.add(departmentLab);
+		textPane.add(departmentLab);
 		departmentBox = new JComboBox<String>();
 		departmentBox.setPreferredSize(jtextSize);
-		JTextPane.add(departmentBox);
+		textPane.add(departmentBox);
 		levelLab = new JLabel("职称：");
 		levelLab.setPreferredSize(jlabelSize);
-		JTextPane.add(levelLab);
+		textPane.add(levelLab);
 		levelBox = new JComboBox<String>();
 		levelBox.setPreferredSize(jtextSize);
-		JTextPane.add(levelBox);
+		textPane.add(levelBox);
 		educationLab = new JLabel("学历");
 		educationLab.setPreferredSize(jlabelSize);
-		JTextPane.add(educationLab);
+		textPane.add(educationLab);
 		educationBox = new JComboBox<String>();
 		educationBox.setPreferredSize(jtextSize);
-		JTextPane.add(educationBox);
+		textPane.add(educationBox);
 		JPanel btnPanel = new JPanel();
 		btnPanel.setPreferredSize(new Dimension(tablePane.getWidth(),40));
 		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		submitBtn = new JButton("提交");
+		submitBtn = new JButton("提交"); 
 		submitBtn.setPreferredSize(jlabelSize);
 		btnPanel.add(submitBtn);
-		JTextPane.add(btnPanel);
-		return JTextPane;
+		textPane.add(btnPanel);
+		return textPane;
 	}
 	
 	private void initComBox() {
@@ -254,7 +254,7 @@ public class TeacherInfo extends CommonsJDialog {
 		if(idText.getText().length() > 0) {
 			teacher.getBaseInfo().setId(idText.getText());
 		}else {
-			JOptionPane.showMessageDialog(null, "请输入学号！", "警告", JOptionPane.ERROR_MESSAGE, 
+			JOptionPane.showMessageDialog(null, "请输入教职工号！", "警告", JOptionPane.ERROR_MESSAGE, 
 					new ImageIcon(new Images().getError2()));
 			return null;
 		}
@@ -460,12 +460,12 @@ public class TeacherInfo extends CommonsJDialog {
 							JOptionPane.ERROR_MESSAGE, new ImageIcon(new Images().getError2()));
 					return ;
 				}
-				if(JOptionPane.showConfirmDialog(null, "确定要删除职工号为："+tablePane.getValueAt(i, 0)
+				if(JOptionPane.showConfirmDialog(null, "确定要删除教职工号为："+tablePane.getValueAt(i, 0)
 				+"的教师吗？", "温馨提示", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, 
 				new ImageIcon(new Images().getWarring2())) == 0) {
 					TeacherDao teacherDao = new TeacherDao();
 					if(teacherDao.deleteData((String)tablePane.getValueAt(i, 0))) {
-						JOptionPane.showMessageDialog(null, "职工号为："+tablePane.getValueAt(i, 0)+
+						JOptionPane.showMessageDialog(null, "教职工号为："+tablePane.getValueAt(i, 0)+
 								"的教师信息已删除！", "温馨提示", JOptionPane.INFORMATION_MESSAGE, 
 								new ImageIcon(new Images().getYes2()));
 						initData();

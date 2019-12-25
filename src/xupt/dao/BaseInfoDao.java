@@ -36,18 +36,8 @@ public class BaseInfoDao extends Dao{
 		return baseInfo;
 	}
 
-//	@Override
-//	public List getList( ) {
-//		// TODO Auto-generated method stub
-//		List baseInfoList = null;
-//		String sql = "select * from "+tableName;
-//		baseInfoList = getData(sql);
-//		
-//		return baseInfoList;
-//	}
-	
-	public List getList( String type) {
-		List baseInfoList = null;
+	public List<BaseInfoModel> getList( String type) {
+		List<BaseInfoModel> baseInfoList = null;
 		String sql = setSql( type);
 		baseInfoList=getData(sql);
 		
@@ -78,6 +68,7 @@ public class BaseInfoDao extends Dao{
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			System.out.println(sql);
 		}finally {
 			this.close();
 		}
@@ -143,7 +134,7 @@ public class BaseInfoDao extends Dao{
 		return isOk;
 	}
 
-	public Object setValue(ResultSet rs) {
+	private BaseInfoModel setValue(ResultSet rs) {
 		// TODO Auto-generated method stub
 		BaseInfoModel base = null;
 		try {
