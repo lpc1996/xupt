@@ -20,36 +20,17 @@ public class MainFrame extends JFrame {
 	 * 主窗口
 	 */
 	private static final long serialVersionUID = 1L;
-	private JMenuBar mainMenu;
 	private JMenuItem changeItem;
 	private JMenuItem changePassItem;
 	private JMenuItem exitItem;
-	private JMenu backstageMenu;
-	private JMenuItem teacherMenu;
-	private JMenuItem studentManageItem;
-	private JMenuItem collegeManageItem;
 	private JMenu userMenu;
-	private JMenuItem departmentItem;
-	private JMenuItem majorItem;
-	private JMenuItem schoolYearItem;
-	private JMenuItem schoolTremItem;
-	private JMenuItem semesterItem;
 	private JMenuItem logoutItem;
-	private JMenuItem xclassItem;
-	private JMenuItem coursesItem;
-	private JMenuItem offeringCoursesItem;
-	private JMenu courseMenu;
-	private JMenuItem studentCourseItem;
-	private JMenu settingMenu;
-	private JMenuItem userManageItem;
-	private JMenu studentMenu;
-	private JMenuItem infoSearchItem;
-	private JMenuItem courseSearchItem;
 	protected PersonalInfo personalInfo;
 	protected UpdatePassWord updatePassWord;
 	protected StudentInfo studentInfo;
 	protected TeacherInfo teacherInfo;
 	protected CollegeInfo collegeInfo;
+	protected DepartmentInfo departmentInfo;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
@@ -204,6 +185,20 @@ public class MainFrame extends JFrame {
 			}
 		});
 		backJMenu.add(collegeItem);
+		JMenuItem departmentItem = new JMenuItem("系部信息管理");
+		departmentItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(departmentInfo == null) {
+					departmentInfo = new DepartmentInfo();
+				}
+				departmentInfo.repaint();
+				departmentInfo.setVisible(true);
+			}
+		});
+		backJMenu.add(departmentItem);
 		return backJMenu;
 	}
 }

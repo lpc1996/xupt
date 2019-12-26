@@ -4,8 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-
 import xupt.mode.BaseInfoModel;
 import xupt.util.Tools;
 
@@ -56,7 +54,6 @@ public class BaseInfoDao extends Dao{
 	private List<BaseInfoModel> getData(String sql) {
 		List<BaseInfoModel> baseInfoList = null;
 		try {
-			Vector<String> column = this.getColumnName("base_info");
 			ResultSet rs = this.excuteQuery(sql);
 			baseInfoList = new ArrayList<>();
 			while(rs.next()) {
@@ -195,9 +192,28 @@ public class BaseInfoDao extends Dao{
 		return enumValue;
 	}
 	
+	public List<String> getIdAndNameList(String type){
+		List<String> list = null;
+		String sql = "Select user_id,name FROM "+tableName+" WHERE user_type='"+type+"';";
+		try {
+			ResultSet rs = this.excuteQuery(sql);
+			list = new ArrayList<String>();
+			while(rs.next()) {
+				list.add(rs.getString(1)+" "+rs.getString(2));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(sql);
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return list;
+	}
+	
 	public static void main(String[] argv) {
 		BaseInfoDao baseDao = new BaseInfoDao();
-		System.out.println(baseDao.getEnumValue("sex"));
+		System.out.println(baseDao.getIdAndNameList("teacher"));
 		
 	}
 

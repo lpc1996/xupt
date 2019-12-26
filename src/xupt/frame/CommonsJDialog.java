@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+
+import xupt.frame.CommonsJDialog.TablePane;
 import xupt.images.Images;
 import xupt.mode.StudentModel;
 
@@ -31,8 +33,12 @@ public class CommonsJDialog extends JDialog {
 	private JButton updateBtn;
 	private JButton deleteBtn;
 	private JButton refreshBtn;
+	protected JButton submitBtn;
 	public final Dimension jlabelSize = new Dimension(80, 30);
 	public final Dimension jtextSize = new Dimension(200, 30);
+	private JPanel contentPane;
+	protected TablePane tablePane;
+	private JPanel btnPanel;
 	
 	/**
 	 * 构造函数
@@ -46,6 +52,21 @@ public class CommonsJDialog extends JDialog {
 				height-size.height)/2 ));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	}
+	
+	protected void InitContentPane() {
+		contentPane = new JPanel();
+		FlowLayout flow = new FlowLayout(FlowLayout.LEFT,5,5);
+		contentPane.setLayout(flow);
+		contentPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
+		
+		tablePane = new TablePane(new Dimension(getWidth()-30,390));
+		contentPane.add(tablePane);
+		
+		btnPanel = createBtnPanel();
+		
+		contentPane.add(btnPanel);
+		this.setContentPane(contentPane);
 	}
 	
 	public JPanel createBtnPanel() {

@@ -30,9 +30,6 @@ public class TeacherInfo extends CommonsJDialog {
 	 * 教职工信息管理
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private TablePane tablePane;
-	private JPanel btnPanel;
 	private JTextField idText;
 	private JTextField nameText;
 	private JTextField formarNameText;
@@ -57,28 +54,13 @@ public class TeacherInfo extends CommonsJDialog {
 	public TeacherInfo() {
 		super(new Dimension(675,550));
 		// TODO Auto-generated constructor stub
-		 setTitle("教职工信息管理");
-		 initContentPane();
-		 initData();
-	}
-	
-	private void initContentPane() {
-		contentPane = new JPanel();
-		FlowLayout flow = new FlowLayout(FlowLayout.LEFT, 5, 5);
-		contentPane.setLayout(flow);
-		contentPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
-		
-		tablePane = new TablePane(new Dimension(getWidth()-10,440));
-		contentPane.add(tablePane);
-		
-		btnPanel = createBtnPanel();
+		setTitle("教职工信息管理");
+		InitContentPane();
 		addInsertAction(insertBtnAction());
 		addUpdateAction(updateBtnAction());
 		addDeleteAction(deleteBtnAction());
 		addRefreshAction(refreshBtnAction());
-		
-		contentPane.add(btnPanel);
-		this.setContentPane(contentPane);
+		initData();
 	}
 	
 	private void initData() {
@@ -204,7 +186,7 @@ public class TeacherInfo extends CommonsJDialog {
 		educationBox.setPreferredSize(jtextSize);
 		textPane.add(educationBox);
 		JPanel btnPanel = new JPanel();
-		btnPanel.setPreferredSize(new Dimension(tablePane.getWidth(),40));
+		btnPanel.setPreferredSize(new Dimension(590,40));
 		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		submitBtn = new JButton("提交"); 
 		submitBtn.setPreferredSize(jlabelSize);
@@ -388,7 +370,7 @@ public class TeacherInfo extends CommonsJDialog {
 							JOptionPane.showMessageDialog(null, "添加成功！", "温馨提示",
 									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
 							initData();
-							contentPane.repaint();
+							repaint();
 							insertJDialog.dispose();
 						}else {
 							JOptionPane.showMessageDialog(null, "添加失败！", "提示消息",
@@ -412,7 +394,7 @@ public class TeacherInfo extends CommonsJDialog {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				updateJDialog = new TextJDialog(new Dimension(630,450));
-				updateJDialog.setTitle("修改学生信息");
+				updateJDialog.setTitle("修改教师信息");
 				updateJDialog.setContentPane(initJTextPane());
 				initComBox();
 				TeacherModel data = getSelectData();
@@ -427,13 +409,13 @@ public class TeacherInfo extends CommonsJDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						TeacherModel data = getData();
+						TeacherModel newdata = getData();
 						TeacherDao teacherDao = new TeacherDao();
-						if(teacherDao.updateData(data, data.getBaseInfo().getId())) {
+						if(teacherDao.updateData(newdata, data.getBaseInfo().getId())) {
 							JOptionPane.showMessageDialog(null, "修改成功！", "温馨提示", 
 									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
 							initData();
-							contentPane.repaint();
+							repaint();
 							updateJDialog.dispose();
 						}else {
 							JOptionPane.showMessageDialog(null, "修改失败！", "提示消息",

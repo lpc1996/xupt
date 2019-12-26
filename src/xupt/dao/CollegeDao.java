@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-
 import xupt.mode.CollegeModel;
 
 public class CollegeDao extends Dao {
@@ -25,6 +24,7 @@ public class CollegeDao extends Dao {
 			college.setName(rs.getString("name"));
 			college.setPresidentId(rs.getString("presidentId"));
 			college.setVicePresidentId(rs.getString("vicePresidentId"));
+			college.setInformation(rs.getString("information"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,5 +60,59 @@ public class CollegeDao extends Dao {
 	public Vector<String> getComments(){
 		Vector<String> comments = getComment(tableName);
 		return comments;
+	}
+	
+	public boolean insertData(CollegeModel college) {
+		boolean result = false;
+		String sql = "INSERT INTO "+tableName+" VALUES('"+college.getId()+"','"+college.getName()+"','"+
+		college.getPresidentId()+"','"+college.getVicePresidentId()+"','"+college.getInformation()+"');";
+		try {
+			if(this.excuteUpdate(sql) == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(sql);
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return result;
+	}
+	
+	public boolean updateData(CollegeModel college,String id) {
+		boolean result = false;
+		String sql = "UPDATE "+tableName+" SET id='"+college.getId()+"',name='"+college.getName()+
+				"',presidentId='"+college.getPresidentId()+"',vicePresidentId='"+college.getVicePresidentId()+
+				"',information='"+college.getInformation()+"' WHERE id='"+id+"';";
+		try {
+			if(excuteUpdate(sql) == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(sql);
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return result;
+	}
+	
+	public boolean deleteData(String id) {
+		boolean result = false;
+		String sql = "DELETE FROM "+tableName+" WHERE id='"+id+"';";
+		try {
+			if(excuteUpdate(sql) == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(sql);
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return result;
 	}
 }

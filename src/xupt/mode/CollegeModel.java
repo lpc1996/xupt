@@ -6,19 +6,15 @@ public class CollegeModel {
 	private String name;
 	private String presidentId;//院长ID
 	private String vicePresidentId;//副院长ID
+	private String information;//学院简介
 
 	/**
 	 * @param id
 	 * @param name
 	 * @param president
 	 * @param introduce
+	 * @param information
 	 */
-	public CollegeModel(String id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
-
 	public CollegeModel() {
 		// TODO Auto-generated constructor stub
 	}
@@ -53,5 +49,13 @@ public class CollegeModel {
 
 	public void setVicePresidentId(String vicePresidentId) {
 		this.vicePresidentId = vicePresidentId;
+	}
+
+	public String getInformation() {
+		return information;
+	}
+
+	public void setInformation(String information) {
+		this.information = information;
 	}
 }
