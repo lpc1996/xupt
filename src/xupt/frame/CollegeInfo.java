@@ -51,26 +51,7 @@ public class CollegeInfo extends CommonsJDialog {
 		addRefreshAction(refreshBtnAction());
 		InitData();
 	}
-	
-//	private void InitContentPane() {
-//		contentPane = new JPanel();
-//		FlowLayout flow = new FlowLayout(FlowLayout.LEFT,5,5);
-//		contentPane.setLayout(flow);
-//		contentPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
-//		
-//		tablePane = new TablePane(new Dimension(getWidth()-20,390));
-//		contentPane.add(tablePane);
-//		
-//		btnPanel = createBtnPanel();
-//		addInsertAction(insertBtnAction());
-//		addUpdateAction(updateBtnAction());
-//		addDeleteAction(deleteBtnAction());
-//		addRefreshAction(refreshBtnAction());
-//		
-//		contentPane.add(btnPanel);
-//		this.setContentPane(contentPane);
-//	}
-	
+
 	protected void InitData() {
 		CollegeDao collegeDao = new CollegeDao();
 		List<CollegeModel> collegeList = collegeDao.getList();
