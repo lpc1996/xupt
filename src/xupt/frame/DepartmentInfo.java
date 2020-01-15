@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xupt.dao.DepartmentDao;
-import xupt.mode.CollegeModel;
 import xupt.mode.DepartmentModel;
 
 public class DepartmentInfo extends CommonsJDialog {
