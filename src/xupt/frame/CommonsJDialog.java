@@ -19,7 +19,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import xupt.images.Images;
-import xupt.mode.CollegeModel;
 
 public abstract class CommonsJDialog extends JDialog {
 
@@ -278,7 +277,7 @@ public abstract class CommonsJDialog extends JDialog {
 	}
 	
 	protected abstract void InitData();
-	protected abstract JPanel InitTextPane();
+	protected abstract JPanel InitTextPane(Dimension size);
 	protected abstract void InitComboBox();
 	protected abstract Object getData();
 	protected abstract void setData(Object data);

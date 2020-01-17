@@ -30,6 +30,7 @@ public class MajorDao extends Dao {
 		}
 		return major;
 	}
+	
 	public List<MajorModel> getList(){
 		List<MajorModel> majorList = new ArrayList<MajorModel>();
 		String sql = "SELECT * FROM "+tableName+";";
@@ -48,6 +49,29 @@ public class MajorDao extends Dao {
 			close();
 		}
 		return majorList;
+	}
+	
+	public boolean insertData(MajorModel major) {
+		boolean result = false;
+		String sql = "INSERT INTO "+tableName+" VALUES('"+major.getId()+"','"+major.getName()+"','"+
+		major.getCollegeId()+"','"+major.getDepartmentId()+"');";
+		result = updateOperation(sql);
+		return result;
+	}
+	
+	public boolean updateData(MajorModel major,String id) {
+		boolean result = false;
+		String sql = "UPDATE "+tableName+" set id='"+major.getId()+"',name='"+major.getName()+"',college_id='"+
+		major.getCollegeId()+"',department_id='"+major.getDepartmentId()+"' WHERE id='"+id+"';";
+		result = updateOperation(sql);
+		return result;
+	}
+	
+	public boolean deleteData(String id) {
+		boolean result = false;
+		String sql = "DELETE FROM "+tableName+" WHERE id='"+id+"';";
+		result = updateOperation(sql);
+		return result;
 	}
 	
 	public Vector<String> getComments(){

@@ -143,7 +143,7 @@ public class StudentInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				insertJDialog = new TextJDialog(new Dimension(630,450));
 				insertJDialog.setTitle("添加学生信息");
-				insertJDialog.setContentPane( InitTextPane() );
+				insertJDialog.setContentPane( InitTextPane(new Dimension(590, 40)) );
 				InitComboBox();
 				submitBtn.addActionListener(new ActionListener() {
 					
@@ -184,7 +184,7 @@ public class StudentInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				updateJDialog = new TextJDialog(new Dimension(630,450));
 				updateJDialog.setTitle("修改学生信息");
-				updateJDialog.setContentPane(InitTextPane());
+				updateJDialog.setContentPane(InitTextPane(new Dimension(590, 40)));
 				InitComboBox();
 				StudentModel data = getSelectData();
 				if(data == null) {
@@ -265,7 +265,7 @@ public class StudentInfo extends CommonsJDialog {
 		return refreshAction;
 	}
 	
-	protected JPanel InitTextPane() {
+	protected JPanel InitTextPane(Dimension size) {
 		JPanel JTextPane = new JPanel();
 		FlowLayout flow = new FlowLayout(FlowLayout.LEFT, 5, 5);
 		JTextPane.setLayout(flow);
@@ -384,13 +384,7 @@ public class StudentInfo extends CommonsJDialog {
 		educationText = new JTextField();
 		educationText.setPreferredSize(jtextSize);
 		JTextPane.add(educationText);
-		JPanel btnPanel = new JPanel();
-		btnPanel.setPreferredSize(new Dimension(590,40));
-		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		submitBtn = new JButton("提交");
-		submitBtn.setPreferredSize(new Dimension(80,30));
-		btnPanel.add(submitBtn);
-		JTextPane.add(btnPanel);
+		JTextPane.add(createTextBtnPane(size));
 		return JTextPane;
 	}
 	

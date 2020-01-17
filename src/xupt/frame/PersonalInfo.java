@@ -84,7 +84,7 @@ public class PersonalInfo extends CommonsJDialog {
 	}
 
 	@Override
-	protected JPanel InitTextPane() {
+	protected JPanel InitTextPane(Dimension size) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -69,7 +69,7 @@ public class CollegeInfo extends CommonsJDialog {
 		tablePane.setColumnWidth(100);
 	}
 	
-	protected JPanel InitTextPane() {
+	protected JPanel InitTextPane(Dimension size) {
 		JPanel textPane = new JPanel();
 		FlowLayout flow = new FlowLayout(FlowLayout.LEFT, 5, 5);
 		textPane.setLayout(flow);
@@ -102,10 +102,10 @@ public class CollegeInfo extends CommonsJDialog {
 		JLabel informationLab = new JLabel("学院简介：");
 		informationLab.setPreferredSize(jlabelSize);
 		informationArea = new JTextArea();
-		informationArea.setPreferredSize(new Dimension(590, 90));
+		informationArea.setPreferredSize(new Dimension(size.width, 90));
 		textPane.add(informationLab);
 		textPane.add(informationArea);
-		textPane.add(createTextBtnPane(new Dimension(590,40)));
+		textPane.add(createTextBtnPane(size));
 		return textPane;
 	}
 	
@@ -222,13 +222,13 @@ public class CollegeInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				CollegeModel college = getSelectData();
 				if(college == null) {
-					JOptionPane.showMessageDialog(null, "请你没有选中一行数据！", "错误", 
+					JOptionPane.showMessageDialog(null, "你没有选中一行数据！", "错误", 
 							JOptionPane.ERROR_MESSAGE, new ImageIcon(new Images().getError2()));
 					return ;
 				}
 				TextJDialog updateJDialog = new TextJDialog(new Dimension(630, 450));
 				updateJDialog.setTitle("修改学院信息");
-				updateJDialog.setContentPane(InitTextPane());
+				updateJDialog.setContentPane(InitTextPane(new Dimension(590, 40)));
 				InitComboBox();
 				setData(college);
 				submitBtn.addActionListener(new ActionListener() {
@@ -267,7 +267,7 @@ public class CollegeInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				TextJDialog insertJDialog = new TextJDialog(new Dimension(630, 450));
 				insertJDialog.setTitle("添加学院信息");
-				insertJDialog.setContentPane(InitTextPane());
+				insertJDialog.setContentPane(InitTextPane(new Dimension(590, 40)));
 				InitComboBox();
 				submitBtn.addActionListener(new ActionListener() {
 					

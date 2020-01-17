@@ -63,7 +63,7 @@ public class DepartmentInfo extends CommonsJDialog {
 		tablePane.setColumnWidth(100);
 	}
 	
-	protected JPanel InitTextPane() {
+	protected JPanel InitTextPane(Dimension size) {
 		JPanel textPane = new JPanel();
 		textPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
 		textPane.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
@@ -85,7 +85,7 @@ public class DepartmentInfo extends CommonsJDialog {
 		collegeBox.setPreferredSize(jtextSize);
 		textPane.add(collegeLab);
 		textPane.add(collegeBox);
-		textPane.add(createTextBtnPane(new Dimension(280, 40)));
+		textPane.add(createTextBtnPane(size));
 		return textPane;
 	}
 	
@@ -211,7 +211,7 @@ public class DepartmentInfo extends CommonsJDialog {
 				}
 				TextJDialog updateJDialog = new TextJDialog(new Dimension(320,250));
 				updateJDialog.setTitle("系部信息修改");
-				updateJDialog.setContentPane(InitTextPane());
+				updateJDialog.setContentPane(InitTextPane(new Dimension(280, 40)));
 				InitComboBox();
 				setData(department);
 				submitBtn.addActionListener(new ActionListener() {
@@ -252,7 +252,7 @@ public class DepartmentInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				TextJDialog insertJDialog = new TextJDialog(new Dimension(320,250));
 				insertJDialog.setTitle("系部信息添加");
-				insertJDialog.setContentPane(InitTextPane());
+				insertJDialog.setContentPane(InitTextPane(new Dimension(280, 40)));
 				InitComboBox();
 				submitBtn.addActionListener(new ActionListener() {
 					
