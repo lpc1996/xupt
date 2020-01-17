@@ -66,17 +66,7 @@ public class CollegeDao extends Dao {
 		boolean result = false;
 		String sql = "INSERT INTO "+tableName+" VALUES('"+college.getId()+"','"+college.getName()+"','"+
 		college.getPresidentId()+"','"+college.getVicePresidentId()+"','"+college.getInformation()+"');";
-		try {
-			if(this.excuteUpdate(sql) == 1) {
-				result = true;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(sql);
-			e.printStackTrace();
-		}finally {
-			close();
-		}
+		result = updateOperation(sql);
 		return result;
 	}
 	
@@ -85,34 +75,14 @@ public class CollegeDao extends Dao {
 		String sql = "UPDATE "+tableName+" SET id='"+college.getId()+"',name='"+college.getName()+
 				"',presidentId='"+college.getPresidentId()+"',vicePresidentId='"+college.getVicePresidentId()+
 				"',information='"+college.getInformation()+"' WHERE id='"+id+"';";
-		try {
-			if(excuteUpdate(sql) == 1) {
-				result = true;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(sql);
-			e.printStackTrace();
-		}finally {
-			close();
-		}
+		result = updateOperation(sql);
 		return result;
 	}
 	
 	public boolean deleteData(String id) {
 		boolean result = false;
 		String sql = "DELETE FROM "+tableName+" WHERE id='"+id+"';";
-		try {
-			if(excuteUpdate(sql) == 1) {
-				result = true;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(sql);
-			e.printStackTrace();
-		}finally {
-			close();
-		}
+		result = updateOperation(sql);
 		return result;
 	}
 }

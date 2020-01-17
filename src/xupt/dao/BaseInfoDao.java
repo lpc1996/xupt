@@ -76,16 +76,7 @@ public class BaseInfoDao extends Dao{
 		// TODO Auto-generated method stub
 		isOk = false;
 		String sql = "DELETE FROM base_info where user_id='"+id+"';";
-		try {
-			if(this.excuteUpdate(sql) == 1) {
-				isOk = true;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}finally {
-			this.close();
-		}
+		isOk = updateOperation(sql);
 		return isOk;
 	}
 
@@ -95,16 +86,7 @@ public class BaseInfoDao extends Dao{
 		String sql = "INSERT INTO base_info values(null,'"+data.getId()+"','"+data.getName()+"','"
 		+data.getFormarName()+"','"+	data.getSex()+"',"+data.getAge()+",'"+data.getNativePlace()+"','"
 				+data.getIDCARDTYPE()+"','"+data.getIDCARDNUM()+"','"+data.getType()+"','"+data.getTel()+"');";
-		try {
-			if(this.excuteUpdate(sql) == 1) {
-				isOk = true;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			isOk = false;
-		}finally {
-			this.close();
-		}
+		isOk = updateOperation(sql);
 		return isOk;
 	}
 
@@ -115,19 +97,7 @@ public class BaseInfoDao extends Dao{
 		+"',formar_name='"+data.getFormarName()+"',sex='"+data.getSex()+"',age="+data.getAge()
 		+",native_place='"+data.getNativePlace()+"',IDCARD_type='"+data.getIDCARDTYPE()+"',IDCARD_NUM='"
 		+data.getIDCARDNUM()+"',tel='"+data.getTel()+"' where user_id='"+id+"';";
-		try {
-			if(this.excuteUpdate(sql) == 1) {
-				isOk = true;
-			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			System.out.println(sql);
-			isOk = false;
-		}finally {
-			this.close();
-		}
+		isOk = updateOperation(sql);
 		return isOk;
 	}
 
