@@ -58,7 +58,7 @@ public abstract class CommonsJDialog extends JDialog {
 		contentPane.setLayout(flow);
 		contentPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
 		
-		tablePane = new TablePane(new Dimension(getWidth()-30,390));
+		tablePane = new TablePane(new Dimension(getWidth()-29,390));
 		contentPane.add(tablePane);
 		
 		btnPanel = createBtnPanel();

@@ -31,6 +31,7 @@ public class MainFrame extends JFrame {
 	protected TeacherInfo teacherInfo;
 	protected CollegeInfo collegeInfo;
 	protected DepartmentInfo departmentInfo;
+	protected MajorInfo majorInfo;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
@@ -185,7 +186,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		backJMenu.add(collegeItem);
-		JMenuItem departmentItem = new JMenuItem("系部信息管理");
+		JMenuItem departmentItem = new JMenuItem("系/部信息管理");
 		departmentItem.addActionListener(new ActionListener() {
 			
 			@Override
@@ -199,6 +200,20 @@ public class MainFrame extends JFrame {
 			}
 		});
 		backJMenu.add(departmentItem);
+		JMenuItem majorItem = new JMenuItem("专业信息管理");
+		majorItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(majorInfo == null) {
+					majorInfo = new MajorInfo();
+				}
+				majorInfo.repaint();
+				majorInfo.setVisible(true);
+			}
+		});
+		backJMenu.add(majorItem);
 		return backJMenu;
 	}
 }
