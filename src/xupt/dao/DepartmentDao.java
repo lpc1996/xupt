@@ -52,17 +52,7 @@ public class DepartmentDao extends Dao {
 		boolean result = false;
 		String sql = "INSERT INTO "+tableName+" VALUES('"+data.getId()+"','"+data.getName()+"','"+data.getCollegeId()+
 				"');";
-		try{
-			if(excuteUpdate(sql) == 1 ) {
-				result = true;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(sql);
-			e.printStackTrace();
-		}finally {
-			close();
-		}
+		result = updateOperation(sql);
 		return result;
 	}
 	

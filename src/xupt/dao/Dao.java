@@ -38,7 +38,7 @@ public class Dao {
 		}
 	}
 	
-	public ResultSet excuteQuery(String sql) {
+	protected ResultSet excuteQuery(String sql) {
 		ResultSet rs = null;
 		try {
 			if(conn.isClosed())
@@ -52,7 +52,7 @@ public class Dao {
 		return rs;
 	}
 	
-	public int excuteUpdate(String sql) {
+	protected int excuteUpdate(String sql) {
 		int i = 0;
 		try {
 			if(conn.isClosed())
