@@ -18,12 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-
-import xupt.frame.CommonsJDialog.TablePane;
 import xupt.images.Images;
-import xupt.mode.StudentModel;
+import xupt.mode.CollegeModel;
 
-public class CommonsJDialog extends JDialog {
+public abstract class CommonsJDialog extends JDialog {
 
 	/**
 	 * 子窗口公用设计
@@ -69,7 +67,17 @@ public class CommonsJDialog extends JDialog {
 		this.setContentPane(contentPane);
 	}
 	
-	public JPanel createBtnPanel() {
+	protected JPanel createTextBtnPane(Dimension size) {
+		JPanel btnPane = new JPanel();
+		btnPane.setPreferredSize(size);
+		btnPane.setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
+		submitBtn = new JButton("提交");
+		submitBtn.setPreferredSize(new Dimension(80,30));
+		btnPane.add(submitBtn);
+		return btnPane;
+	}
+	
+	private JPanel createBtnPanel() {
 		JPanel btnPanel = new JPanel();
 		FlowLayout flow = new FlowLayout(5);
 		btnPanel.setLayout(flow);
@@ -253,7 +261,7 @@ public class CommonsJDialog extends JDialog {
 					}
 					int row = -1;
 					for(int i=0; i<table.getRowCount(); i++) {
-						if(str.equals(table.getValueAt(i, 0)) || str.equals(table.getValueAt(i, 1))) {
+						if(str.indexOf( table.getValueAt(i, 0)+"") >= 0 || str.equals(table.getValueAt(i, 1))) {
 							row = i;
 							table.setRowSelectionInterval(i, i);
 							table.scrollRectToVisible(table.getCellRect(i, 0, true));
@@ -269,4 +277,14 @@ public class CommonsJDialog extends JDialog {
 		}
 	}
 	
+	protected abstract void InitData();
+	protected abstract JPanel InitTextPane();
+	protected abstract void InitComboBox();
+	protected abstract Object getData();
+	protected abstract void setData(Object data);
+	protected abstract Object getSelectData();
+	protected abstract ActionListener refreshBtnAction();
+	protected abstract ActionListener deleteBtnAction();
+	protected abstract ActionListener updateBtnAction();
+	protected abstract ActionListener insertBtnAction();
 }

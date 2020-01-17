@@ -147,24 +147,40 @@ public class Dao {
 	}
 	
 	//获取字段类型为enum的字段所有可能的类型值
-		public List<String> getEnumValue(String tableName,String columnName){
-			List<String> enumValue = null;
-			String sql = "SELECT column_type FROM information_schema.COLUMNS WHERE TABLE_SCHEMA="
-					+ "'xupt' AND DATA_TYPE='enum' AND TABLE_NAME='"+tableName+"' AND COLUMN_NAME='"+columnName+
-					"';";
-			try {
-				ResultSet rs = this.excuteQuery(sql);
-				if(rs.next()) {
-					enumValue = new Tools().splitEnumValue(rs.getString(1));
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}finally {
-				this.close();
+	public List<String> getEnumValue(String tableName,String columnName){
+		List<String> enumValue = null;
+		String sql = "SELECT column_type FROM information_schema.COLUMNS WHERE TABLE_SCHEMA="
+				+ "'xupt' AND DATA_TYPE='enum' AND TABLE_NAME='"+tableName+"' AND COLUMN_NAME='"+columnName+
+				"';";
+		try {
+			ResultSet rs = this.excuteQuery(sql);
+			if(rs.next()) {
+				enumValue = new Tools().splitEnumValue(rs.getString(1));
 			}
-			return enumValue;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			this.close();
 		}
+		return enumValue;
+	}
+	
+	protected boolean updateOperation(String sql) {
+		boolean result = false;
+		try {
+			if(excuteUpdate(sql) == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(sql);
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return result;
+	}
 	
 	public static void main(String[] argv) {
 		Dao dao = new Dao();

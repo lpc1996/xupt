@@ -84,4 +84,64 @@ public class UpdatePassWord extends CommonsJDialog {
 			}
 		});
 	}
+
+	@Override
+	protected void InitData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected JPanel InitTextPane() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void InitComboBox() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Object getData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void setData(Object data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Object getSelectData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionListener refreshBtnAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionListener deleteBtnAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionListener updateBtnAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionListener insertBtnAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

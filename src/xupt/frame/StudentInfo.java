@@ -64,10 +64,10 @@ public class StudentInfo extends CommonsJDialog {
 		addUpdateAction(updateBtnAction());
 		addDeleteAction(deleteBtnAction());
 		addRefreshAction(refreshBtnAction());
-		initData();
+		InitData();
 	}
 	
-	private void initData() {
+	protected void InitData() {
 		StudentDao studentDao = new StudentDao();
 		List<StudentModel> studentList = studentDao.getList();
 		Vector<String> comments = studentDao.getComments();
@@ -133,7 +133,7 @@ public class StudentInfo extends CommonsJDialog {
 		return student;
 	}
 	
-	private ActionListener insertBtnAction() {
+	protected ActionListener insertBtnAction() {
 		 ActionListener insertAction = new ActionListener() {
 			
 			private TextJDialog insertJDialog;
@@ -143,8 +143,8 @@ public class StudentInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				insertJDialog = new TextJDialog(new Dimension(630,450));
 				insertJDialog.setTitle("添加学生信息");
-				insertJDialog.setContentPane( initJTextPane() );
-				initComBox();
+				insertJDialog.setContentPane( InitTextPane() );
+				InitComboBox();
 				submitBtn.addActionListener(new ActionListener() {
 					
 					@Override
@@ -158,7 +158,7 @@ public class StudentInfo extends CommonsJDialog {
 						if(studentDao.insertData(student)) {
 							JOptionPane.showMessageDialog(null, "添加成功！", "温馨提示",
 									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
-							initData();
+							InitData();
 							repaint();
 							insertJDialog.dispose();
 						}else {
@@ -174,7 +174,7 @@ public class StudentInfo extends CommonsJDialog {
 		return insertAction;
 	}
 	
-	private ActionListener updateBtnAction() {
+	protected ActionListener updateBtnAction() {
 		ActionListener updateAction = new ActionListener() {
 			
 			private TextJDialog updateJDialog;
@@ -184,8 +184,8 @@ public class StudentInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				updateJDialog = new TextJDialog(new Dimension(630,450));
 				updateJDialog.setTitle("修改学生信息");
-				updateJDialog.setContentPane(initJTextPane());
-				initComBox();
+				updateJDialog.setContentPane(InitTextPane());
+				InitComboBox();
 				StudentModel data = getSelectData();
 				if(data == null) {
 					JOptionPane.showMessageDialog(null, "你没有选中一行数据！", "错误", 
@@ -203,7 +203,7 @@ public class StudentInfo extends CommonsJDialog {
 						if(studentDao.updateData(newdata, data.getBaseInfo().getId())) {
 							JOptionPane.showMessageDialog(null, "修改成功！", "温馨提示", 
 									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
-							initData();
+							InitData();
 							repaint();
 							updateJDialog.dispose();
 						}else {
@@ -219,7 +219,7 @@ public class StudentInfo extends CommonsJDialog {
 		return updateAction;
 	}
 	
-	private ActionListener deleteBtnAction() {
+	protected ActionListener deleteBtnAction() {
 		ActionListener deleteAction = new ActionListener() {
 			
 			@Override
@@ -239,7 +239,7 @@ public class StudentInfo extends CommonsJDialog {
 						JOptionPane.showMessageDialog(null, "学号为："+tablePane.getValueAt(i, 0)+
 								"的学生信息已删除！", "温馨提示", JOptionPane.INFORMATION_MESSAGE, 
 								new ImageIcon(new Images().getYes2()));
-						initData();
+						InitData();
 						repaint();
 					}else {
 						JOptionPane.showMessageDialog(null, "删除失败！", "错误", JOptionPane.ERROR_MESSAGE,
@@ -252,20 +252,20 @@ public class StudentInfo extends CommonsJDialog {
 		return deleteAction;
 	}
 	
-	private ActionListener refreshBtnAction() {
+	protected ActionListener refreshBtnAction() {
 		ActionListener refreshAction = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				initData();
+				InitData();
 				repaint();
 			}
 		};
 		return refreshAction;
 	}
 	
-	private JPanel initJTextPane() {
+	protected JPanel InitTextPane() {
 		JPanel JTextPane = new JPanel();
 		FlowLayout flow = new FlowLayout(FlowLayout.LEFT, 5, 5);
 		JTextPane.setLayout(flow);
@@ -394,7 +394,7 @@ public class StudentInfo extends CommonsJDialog {
 		return JTextPane;
 	}
 	
-	private void initComBox() {
+	protected void InitComboBox() {
 		
 		Dao dao = new Dao();
 		String tableName = "base_student";
@@ -446,7 +446,7 @@ public class StudentInfo extends CommonsJDialog {
 		
 	}
 	
-	private StudentModel getData() {
+	protected StudentModel getData() {
 		StudentModel student = new StudentModel();
 		if(idText.getText().length() > 0) {
 			student.getBaseInfo().setId(idText.getText());
@@ -528,25 +528,26 @@ public class StudentInfo extends CommonsJDialog {
 		return student;
 	}
 	
-	private void setData(StudentModel data) {
-		idText.setText(data.getBaseInfo().getId());
-		nameText.setText(data.getBaseInfo().getName());
-		nativePlaceText.setText(data.getBaseInfo().getNativePlace());
-		formarNameText.setText(data.getBaseInfo().getFormarName());
-		tool.setSelectedItem(sexComBox, data.getBaseInfo().getSex());
-		ageText.setText(data.getBaseInfo().getAge()+"");
-		tool.setSelectedItem(idCardTypeComBox, data.getBaseInfo().getIDCARDTYPE());
-		idCardNumText.setText(data.getBaseInfo().getIDCARDNUM());
-		telText.setText(data.getBaseInfo().getTel());
-		yearText.setText(data.getYear());
-		tool.setSelectedItem(collegeComBox, data.getCollege());
-		tool.setSelectedItem(departmentBox, data.getDepartment());
-		tool.setSelectedItem(majorBox, data.getMajor());
-		tool.setSelectedItem(gradeBox, data.getGrade());
-		tool.setSelectedItem(classBox, data.getClassId());
-		tool.setSelectedItem(cultureLevelBox, data.getCulture_level());
-		tool.setSelectedItem(studentTypeBox, data.getType());
-		educationText.setText(data.getEducation());
+	protected void setData(Object data) {
+		StudentModel student = (StudentModel)data;
+		idText.setText(student.getBaseInfo().getId());
+		nameText.setText(student.getBaseInfo().getName());
+		nativePlaceText.setText(student.getBaseInfo().getNativePlace());
+		formarNameText.setText(student.getBaseInfo().getFormarName());
+		tool.setSelectedItem(sexComBox, student.getBaseInfo().getSex());
+		ageText.setText(student.getBaseInfo().getAge()+"");
+		tool.setSelectedItem(idCardTypeComBox, student.getBaseInfo().getIDCARDTYPE());
+		idCardNumText.setText(student.getBaseInfo().getIDCARDNUM());
+		telText.setText(student.getBaseInfo().getTel());
+		yearText.setText(student.getYear());
+		tool.setSelectedItem(collegeComBox, student.getCollege());
+		tool.setSelectedItem(departmentBox, student.getDepartment());
+		tool.setSelectedItem(majorBox, student.getMajor());
+		tool.setSelectedItem(gradeBox, student.getGrade());
+		tool.setSelectedItem(classBox, student.getClassId());
+		tool.setSelectedItem(cultureLevelBox, student.getCulture_level());
+		tool.setSelectedItem(studentTypeBox, student.getType());
+		educationText.setText(student.getEducation());
 	}
-	
+
 }

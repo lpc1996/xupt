@@ -2,6 +2,7 @@ package xupt.frame;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -80,5 +81,59 @@ public class PersonalInfo extends CommonsJDialog {
 		idcardTypeLab.setText("证件类型："+Login.getUser().getIDCARDTYPE());
 		idcardNumLab.setText("证件号码："+Login.getUser().getIDCARDNUM());
 		telLab.setText("电话号码："+Login.getUser().getTel());
+	}
+
+	@Override
+	protected JPanel InitTextPane() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void InitComboBox() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Object getData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void setData(Object data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Object getSelectData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionListener refreshBtnAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionListener deleteBtnAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionListener updateBtnAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionListener insertBtnAction() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

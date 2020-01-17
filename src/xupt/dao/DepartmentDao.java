@@ -47,6 +47,39 @@ public class DepartmentDao extends Dao {
 		}
 		return departmentList;
 	}
+	
+	public boolean insertData(DepartmentModel data) {
+		boolean result = false;
+		String sql = "INSERT INTO "+tableName+" VALUES('"+data.getId()+"','"+data.getName()+"','"+data.getCollegeId()+
+				"');";
+		try{
+			if(excuteUpdate(sql) == 1 ) {
+				result = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(sql);
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return result;
+	}
+	
+	public boolean updateData(DepartmentModel data,String id) {
+		boolean result = false;
+		String sql = "update "+tableName+" set id='"+data.getId()+"',name='"+data.getName()+"',college_id='"+
+		data.getCollegeId()+"' WHERE id='"+id+"';";
+		result = updateOperation(sql);
+		return result;
+	}
+	
+	public boolean deleteData(String id) {
+		boolean result = false;
+		String sql = "DELETE FROM "+tableName+" WHERE id='"+id+"';";
+		result = updateOperation(sql);
+		return result;
+	}
 
 	public Vector<String> getComments() {
 		// TODO Auto-generated method stub

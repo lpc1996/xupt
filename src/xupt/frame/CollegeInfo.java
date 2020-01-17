@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -106,17 +105,11 @@ public class CollegeInfo extends CommonsJDialog {
 		informationArea.setPreferredSize(new Dimension(590, 90));
 		textPane.add(informationLab);
 		textPane.add(informationArea);
-		JPanel btnPane = new JPanel();
-		btnPane.setPreferredSize(new Dimension(590, 40));
-		btnPane.setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
-		submitBtn = new JButton("提交");
-		submitBtn.setPreferredSize(new Dimension(80,30));
-		btnPane.add(submitBtn);
-		textPane.add(btnPane);
+		textPane.add(createTextBtnPane(new Dimension(590,40)));
 		return textPane;
 	}
 	
-	protected void initComboBox() {
+	protected void InitComboBox() {
 		List<String> idAndNameList = new BaseInfoDao().getIdAndNameList("teacher");
 		for(String name:idAndNameList) {
 			presidentBox.addItem(name);
@@ -148,13 +141,14 @@ public class CollegeInfo extends CommonsJDialog {
 		return college;
 	}
 	
-	protected void setData(CollegeModel data) {
-		idText.setText(data.getId());
-		nameText.setText(data.getName());
+	protected void setData(Object data) {
+		CollegeModel college = (CollegeModel)data;
+		idText.setText(college.getId());
+		nameText.setText(college.getName());
 		Tools tool = new Tools();
-		tool.setSelectedItem(presidentBox, data.getPresidentId());
-		tool.setSelectedItem(vicePresidentBox, data.getVicePresidentId());
-		informationArea.setText(data.getInformation());
+		tool.setSelectedItem(presidentBox, college.getPresidentId());
+		tool.setSelectedItem(vicePresidentBox, college.getVicePresidentId());
+		informationArea.setText(college.getInformation());
 	}
 	
 	protected CollegeModel getSelectData() {
@@ -171,7 +165,7 @@ public class CollegeInfo extends CommonsJDialog {
 		return college;
 	}
 	
-	private ActionListener refreshBtnAction() {
+	protected ActionListener refreshBtnAction() {
 		// TODO Auto-generated method stub
 		ActionListener refreshAction = new ActionListener() {
 			
@@ -185,7 +179,7 @@ public class CollegeInfo extends CommonsJDialog {
 		return refreshAction; 
 	}
 
-	private ActionListener deleteBtnAction() {
+	protected ActionListener deleteBtnAction() {
 		// TODO Auto-generated method stub
 		ActionListener deleteAction = new ActionListener() {
 			
@@ -219,7 +213,7 @@ public class CollegeInfo extends CommonsJDialog {
 		return deleteAction;
 	}
 
-	private ActionListener updateBtnAction() {
+	protected ActionListener updateBtnAction() {
 		// TODO Auto-generated method stub
 		ActionListener updateAction = new ActionListener() {
 			
@@ -235,7 +229,7 @@ public class CollegeInfo extends CommonsJDialog {
 				TextJDialog updateJDialog = new TextJDialog(new Dimension(630, 450));
 				updateJDialog.setTitle("修改学院信息");
 				updateJDialog.setContentPane(InitTextPane());
-				initComboBox();
+				InitComboBox();
 				setData(college);
 				submitBtn.addActionListener(new ActionListener() {
 					
@@ -244,6 +238,7 @@ public class CollegeInfo extends CommonsJDialog {
 						// TODO Auto-generated method stub
 						CollegeDao collegeDao = new CollegeDao();
 						CollegeModel newCollege = getData();
+						if(newCollege == null) return;
 						if(collegeDao.updateData(newCollege, college.getId())) {
 							JOptionPane.showMessageDialog(null, "修改成功！", "温馨提示", 
 									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
@@ -263,7 +258,7 @@ public class CollegeInfo extends CommonsJDialog {
 		return updateAction;
 	}
 
-	private ActionListener insertBtnAction() {
+	protected ActionListener insertBtnAction() {
 		// TODO Auto-generated method stub
 		ActionListener insertAction = new ActionListener() {
 			
@@ -273,7 +268,7 @@ public class CollegeInfo extends CommonsJDialog {
 				TextJDialog insertJDialog = new TextJDialog(new Dimension(630, 450));
 				insertJDialog.setTitle("添加学院信息");
 				insertJDialog.setContentPane(InitTextPane());
-				initComboBox();
+				InitComboBox();
 				submitBtn.addActionListener(new ActionListener() {
 					
 					@Override
@@ -301,5 +296,4 @@ public class CollegeInfo extends CommonsJDialog {
 		};
 		return insertAction;
 	}
-
 }

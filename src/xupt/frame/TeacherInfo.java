@@ -60,10 +60,10 @@ public class TeacherInfo extends CommonsJDialog {
 		addUpdateAction(updateBtnAction());
 		addDeleteAction(deleteBtnAction());
 		addRefreshAction(refreshBtnAction());
-		initData();
+		InitData();
 	}
 	
-	private void initData() {
+	protected void InitData() {
 		TeacherDao teacherDao = new TeacherDao();
 		List<TeacherModel> teacherList = teacherDao.getList();
 		Vector<String> comments = teacherDao.getComments();
@@ -91,7 +91,7 @@ public class TeacherInfo extends CommonsJDialog {
 		tablePane.setColumnWidth(80);
 	}
 	
-	private JPanel initJTextPane() {
+	protected JPanel InitTextPane() {
 		JPanel textPane = new JPanel();
 		FlowLayout flow = new FlowLayout(FlowLayout.LEFT, 5, 5);
 		textPane.setLayout(flow);
@@ -195,7 +195,7 @@ public class TeacherInfo extends CommonsJDialog {
 		return textPane;
 	}
 	
-	private void initComBox() {
+	protected void InitComboBox() {
 			
 		Dao dao = new Dao();
 		String tableName = "base_teacher";
@@ -230,7 +230,7 @@ public class TeacherInfo extends CommonsJDialog {
 		}
 	}
 	
-	private TeacherModel getData() {
+	protected TeacherModel getData() {
 		Tools tool = new Tools();
 		TeacherModel teacher = new TeacherModel();
 		if(idText.getText().length() > 0) {
@@ -303,25 +303,26 @@ public class TeacherInfo extends CommonsJDialog {
 		return teacher;
 	}
 	
-	private void setData(TeacherModel data) {
+	protected void setData(Object data) {
+		TeacherModel teacher = (TeacherModel)data;
 		Tools tool = new Tools();
-		idText.setText(data.getBaseInfo().getId());
-		nameText.setText(data.getBaseInfo().getName());
-		nativePlaceText.setText(data.getBaseInfo().getNativePlace());
-		formarNameText.setText(data.getBaseInfo().getFormarName());
-		tool.setSelectedItem(sexComBox, data.getBaseInfo().getSex());
-		ageText.setText(data.getBaseInfo().getAge()+"");
-		tool.setSelectedItem(idCardTypeComBox, data.getBaseInfo().getIDCARDTYPE());
-		idCardNumText.setText(data.getBaseInfo().getIDCARDNUM());
-		telText.setText(data.getBaseInfo().getTel());
-		yearText.setText(data.getYear());
-		tool.setSelectedItem(collegeBox, data.getCollege());
-		tool.setSelectedItem(departmentBox, data.getDepartment());
-		levelBox.setSelectedItem(data.getLevel());
-		educationBox.setSelectedItem(data.getEducation());
+		idText.setText(teacher.getBaseInfo().getId());
+		nameText.setText(teacher.getBaseInfo().getName());
+		nativePlaceText.setText(teacher.getBaseInfo().getNativePlace());
+		formarNameText.setText(teacher.getBaseInfo().getFormarName());
+		tool.setSelectedItem(sexComBox, teacher.getBaseInfo().getSex());
+		ageText.setText(teacher.getBaseInfo().getAge()+"");
+		tool.setSelectedItem(idCardTypeComBox, teacher.getBaseInfo().getIDCARDTYPE());
+		idCardNumText.setText(teacher.getBaseInfo().getIDCARDNUM());
+		telText.setText(teacher.getBaseInfo().getTel());
+		yearText.setText(teacher.getYear());
+		tool.setSelectedItem(collegeBox, teacher.getCollege());
+		tool.setSelectedItem(departmentBox, teacher.getDepartment());
+		levelBox.setSelectedItem(teacher.getLevel());
+		educationBox.setSelectedItem(teacher.getEducation());
 	}
 	
-	private TeacherModel getSelectData() {
+	protected TeacherModel getSelectData() {
 		// TODO Auto-generated method stub
 		TeacherModel data = null;
 		int row = tablePane.getSelectRow();
@@ -346,7 +347,7 @@ public class TeacherInfo extends CommonsJDialog {
 		return data;
 	}
 	
-	private ActionListener insertBtnAction() {
+	protected ActionListener insertBtnAction() {
 		ActionListener insertAction = new ActionListener() {
 			
 			@Override
@@ -354,8 +355,8 @@ public class TeacherInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				TextJDialog insertJDialog = new TextJDialog(new Dimension(630,450));
 				insertJDialog.setTitle("添加教师信息");
-				insertJDialog.setContentPane(initJTextPane());
-				initComBox();
+				insertJDialog.setContentPane(InitTextPane());
+				InitComboBox();
 				submitBtn.addActionListener(new ActionListener() {
 					
 					@Override
@@ -369,7 +370,7 @@ public class TeacherInfo extends CommonsJDialog {
 						if(teacherDao.insertData(teacher)) {
 							JOptionPane.showMessageDialog(null, "添加成功！", "温馨提示",
 									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
-							initData();
+							InitData();
 							repaint();
 							insertJDialog.dispose();
 						}else {
@@ -385,7 +386,7 @@ public class TeacherInfo extends CommonsJDialog {
 		return insertAction;
 	}
 	
-	private ActionListener updateBtnAction() {
+	protected ActionListener updateBtnAction() {
 		ActionListener updateAction = new ActionListener() {
 			
 			private TextJDialog updateJDialog;
@@ -395,8 +396,8 @@ public class TeacherInfo extends CommonsJDialog {
 				// TODO Auto-generated method stub
 				updateJDialog = new TextJDialog(new Dimension(630,450));
 				updateJDialog.setTitle("修改教师信息");
-				updateJDialog.setContentPane(initJTextPane());
-				initComBox();
+				updateJDialog.setContentPane(InitTextPane());
+				InitComboBox();
 				TeacherModel data = getSelectData();
 				if(data == null) {
 					JOptionPane.showMessageDialog(null, "你没有选中一行数据！", "错误", 
@@ -414,7 +415,7 @@ public class TeacherInfo extends CommonsJDialog {
 						if(teacherDao.updateData(newdata, data.getBaseInfo().getId())) {
 							JOptionPane.showMessageDialog(null, "修改成功！", "温馨提示", 
 									JOptionPane.OK_OPTION, new ImageIcon(new Images().getSuccessful()));
-							initData();
+							InitData();
 							repaint();
 							updateJDialog.dispose();
 						}else {
@@ -430,7 +431,7 @@ public class TeacherInfo extends CommonsJDialog {
 		return updateAction;
 	}
 	
-	private ActionListener deleteBtnAction() {
+	protected ActionListener deleteBtnAction() {
 		ActionListener deleteAction = new ActionListener() {
 			
 			@Override
@@ -450,7 +451,7 @@ public class TeacherInfo extends CommonsJDialog {
 						JOptionPane.showMessageDialog(null, "教职工号为："+tablePane.getValueAt(i, 0)+
 								"的教师信息已删除！", "温馨提示", JOptionPane.INFORMATION_MESSAGE, 
 								new ImageIcon(new Images().getYes2()));
-						initData();
+						InitData();
 						repaint();
 					}else {
 						JOptionPane.showMessageDialog(null, "删除失败！", "错误", JOptionPane.ERROR_MESSAGE,
@@ -463,13 +464,13 @@ public class TeacherInfo extends CommonsJDialog {
 		return deleteAction;
 	}
 	
-	private ActionListener refreshBtnAction() {
+	protected ActionListener refreshBtnAction() {
 		ActionListener refreshAction = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				initData();
+				InitData();
 				repaint();
 			}
 		};
