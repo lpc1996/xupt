@@ -35,6 +35,7 @@ public class MainFrame extends JFrame {
 	protected SemesterInfo semesterInfo;
 	protected SchoolTremInfo schoolTremInfo;
 	protected SchoolYearInfo schoolYearInfo;
+	protected TeamInfo teamInfo;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
@@ -260,6 +261,20 @@ public class MainFrame extends JFrame {
 			}
 		});
 		backJMenu.add(schoolTremItem);
+		JMenuItem teamItem = new JMenuItem("班级信息管理");
+		teamItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(teamInfo == null) {
+					teamInfo = new TeamInfo();
+				}
+				teamInfo.repaint();
+				teamInfo.setVisible(true);
+			}
+		});
+		backJMenu.add(teamItem);
 		return backJMenu;
 	}
 }

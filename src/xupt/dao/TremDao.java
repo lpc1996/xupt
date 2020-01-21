@@ -2,7 +2,7 @@ package xupt.dao;
 
 import java.util.List;
 
-public class ClassDao extends Dao {
+public class TremDao extends Dao {
 
 	private final String tableName = "xclass";
 	
