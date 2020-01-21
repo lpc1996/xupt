@@ -50,7 +50,6 @@ public class StudentInfo extends CommonsJDialog {
 	private JComboBox<String> cultureLevelBox;
 	private JComboBox<String> studentTypeBox;
 	private JTextField educationText;
-	private JButton submitBtn;
 	private JTextField idCardNumText;
 	private Tools tool;
 

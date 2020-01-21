@@ -49,7 +49,6 @@ public class TeacherInfo extends CommonsJDialog {
 	private JComboBox<String> levelBox;
 	private JLabel educationLab;
 	private JComboBox<String> educationBox;
-	private JButton submitBtn;
 
 	public TeacherInfo() {
 		super(new Dimension(675,550));

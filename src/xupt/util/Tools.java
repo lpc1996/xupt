@@ -1,7 +1,9 @@
 package xupt.util;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -13,19 +15,17 @@ public class Tools {
 		return strArray[0];
 	}
 	
-	public void setSelectedItem(JComboBox box,String item) {
+	public void setSelectedItem(JComboBox<String> box,String item) {
 		for(int i = 0; i < box.getItemCount(); i++) {
 			if(item.equals(Split(box.getItemAt(i)+"")))
 				box.setSelectedIndex(i);
 		}
 	}
 	
-	public String getNowTime() {
-			Calendar now = Calendar.getInstance(); 
-			String year = now.get(Calendar.YEAR)+"";
-			String month = now.get(Calendar.MONTH)+"";
-			String day = now.get(Calendar.DAY_OF_MONTH)+"";
-			return year+"-"+month+"-"+day;
+	public String getNowTime() {	
+			Date date = new Date();
+			String YMD = String.format("%tF", date);
+			return YMD;
 	}
 	
 	public List<String> splitEnumValue(String value) {
@@ -50,6 +50,6 @@ public class Tools {
 	
 	public static void main(String[] argv) {
 		Tools tool = new Tools();
-		tool.splitEnumValue("enum('ÄÐ','Å®','±£ÃÜ')");
+		tool.getNowTime();
 	}
 }

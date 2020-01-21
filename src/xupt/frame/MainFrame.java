@@ -32,6 +32,9 @@ public class MainFrame extends JFrame {
 	protected CollegeInfo collegeInfo;
 	protected DepartmentInfo departmentInfo;
 	protected MajorInfo majorInfo;
+	protected SemesterInfo semesterInfo;
+	protected SchoolTremInfo schoolTremInfo;
+	protected SchoolYearInfo schoolYearInfo;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
@@ -214,6 +217,49 @@ public class MainFrame extends JFrame {
 			}
 		});
 		backJMenu.add(majorItem);
+		backJMenu.add(departmentItem);
+		JMenuItem semesterItem = new JMenuItem("年级信息管理");
+		semesterItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(semesterInfo == null) {
+					semesterInfo = new SemesterInfo();
+				}
+				semesterInfo.repaint();
+				semesterInfo.setVisible(true);
+			}
+		});
+		backJMenu.add(semesterItem);
+		JMenuItem schoolYearItem = new JMenuItem("学年信息管理");
+		schoolYearItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(schoolYearInfo == null) {
+					schoolYearInfo = new SchoolYearInfo();
+				}
+				schoolYearInfo.repaint();
+				schoolYearInfo.setVisible(true);
+			}
+		});
+		backJMenu.add(schoolYearItem);
+		JMenuItem schoolTremItem = new JMenuItem("学期信息管理");
+		schoolTremItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(schoolTremInfo == null) {
+					schoolTremInfo = new SchoolTremInfo();
+				}
+				schoolTremInfo.repaint();
+				schoolTremInfo.setVisible(true);
+			}
+		});
+		backJMenu.add(schoolTremItem);
 		return backJMenu;
 	}
 }
