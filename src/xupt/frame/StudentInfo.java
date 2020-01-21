@@ -8,20 +8,19 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import xupt.dao.ClassDao;
 import xupt.dao.CollegeDao;
 import xupt.dao.Dao;
 import xupt.dao.DepartmentDao;
 import xupt.dao.MajorDao;
 import xupt.dao.SemesterDao;
 import xupt.dao.StudentDao;
+import xupt.dao.TeamDao;
 import xupt.images.Images;
 import xupt.mode.StudentModel;
 import xupt.util.DateChooser;
@@ -30,6 +29,7 @@ import xupt.util.Tools;
 public class StudentInfo extends CommonsJDialog {
 
 	/**
+	 * @author 濃霧-遠方
 	 * 学生信息管理
 	 */
 	private static final long serialVersionUID = 1L;
@@ -421,7 +421,7 @@ public class StudentInfo extends CommonsJDialog {
 			gradeBox.addItem(value.get(i));
 		}
 		value = null;
-		value = new ClassDao().getIdAndNameList();
+		value = new TeamDao().getIdAndNameList();
 		for(int i=0; i<value.size(); i++) {
 			classBox.addItem(value.get(i));
 		}

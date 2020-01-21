@@ -1,6 +1,6 @@
 package xupt.mode;
 
-public class XClassModel {
+public class TeamModel {
 	
 	private String id;
 	private String name;
@@ -10,6 +10,7 @@ public class XClassModel {
 	private String majorId;
 	private String semester;
 	/**
+	 * @author 濃霧-遠方
 	 * @param id
 	 * @param name
 	 * @param number
@@ -17,7 +18,7 @@ public class XClassModel {
 	 * @param departmentId
 	 * @param majorId
 	 */
-	public XClassModel(String id, String name, int number, String collegeId, String departmentId, String majorId,String semester) {
+	public TeamModel(String id, String name, int number, String collegeId, String departmentId, String majorId,String semester) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -28,7 +29,7 @@ public class XClassModel {
 		this.semester = semester;
 	}
 
-	public XClassModel() {
+	public TeamModel() {
 		// TODO 自动生成的构造函数存根
 	}
 

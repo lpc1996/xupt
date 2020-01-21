@@ -2,7 +2,7 @@ package xupt.dao;
 
 import java.util.List;
 
-public class TremDao extends Dao {
+public class TeamDao extends Dao {
 
 	private final String tableName = "xclass";
 	
@@ -10,4 +10,6 @@ public class TremDao extends Dao {
 		List<String> list = getIdAndNameList(tableName);
 		return list;
 	}
+	
+	public List<>
 }
