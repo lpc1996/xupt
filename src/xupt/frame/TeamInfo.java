@@ -349,5 +349,4 @@ public class TeamInfo extends CommonsJDialog {
 		};
 		return insertAction;
 	}
-
 }
