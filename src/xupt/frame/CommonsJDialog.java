@@ -276,6 +276,14 @@ public abstract class CommonsJDialog extends JDialog {
 		}
 	}
 	
+	protected JPanel createTextJPanel() {
+		JPanel textPane = new JPanel();
+		FlowLayout flow = new FlowLayout(FlowLayout.LEFT, 5, 5);
+		textPane.setLayout(flow);
+		textPane.setBorder(BorderFactory.createTitledBorder("操作一体化"));
+		return textPane;
+	}
+	
 	protected abstract void InitData();
 	protected abstract JPanel InitTextPane(Dimension size);
 	protected abstract void InitComboBox();
