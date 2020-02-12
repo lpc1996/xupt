@@ -14,7 +14,6 @@ public class LoginModel {
 	 * @param id
 	 * @param name
 	 * @param limit
-	 * @param pass
 	 */
 	public LoginModel(String id, String name, int limit) {
 		super();

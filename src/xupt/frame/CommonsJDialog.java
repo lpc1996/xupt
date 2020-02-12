@@ -38,7 +38,8 @@ public abstract class CommonsJDialog extends JDialog {
 	private JPanel btnPanel;
 	
 	/**
-	 * ¹¹Ôìº¯Êý
+	 * 
+	 * @param size
 	 */
 	public CommonsJDialog(Dimension size) {
 		// TODO Auto-generated constructor stub

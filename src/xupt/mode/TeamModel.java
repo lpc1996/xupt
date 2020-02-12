@@ -9,25 +9,6 @@ public class TeamModel {
 	private String departmentId;
 	private String majorId;
 	private String semester;
-	/**
-	 * @author 濃霧-遠方
-	 * @param id
-	 * @param name
-	 * @param number
-	 * @param collegeId
-	 * @param departmentId
-	 * @param majorId
-	 */
-	public TeamModel(String id, String name, int number, String collegeId, String departmentId, String majorId,String semester) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.number = number;
-		this.collegeId = collegeId;
-		this.departmentId = departmentId;
-		this.majorId = majorId;
-		this.semester = semester;
-	}
 
 	public TeamModel() {
 		// TODO 自动生成的构造函数存根

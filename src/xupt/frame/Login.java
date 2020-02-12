@@ -7,7 +7,6 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,18 +17,18 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
 import xupt.dao.BaseInfoDao;
 import xupt.dao.LoginDao;
 import xupt.images.Images;
 import xupt.mode.BaseInfoModel;
 import xupt.mode.LoginModel;
 
+/**
+ * 登录系统
+ * @author 濃霧-遠方
+ */
 public class Login extends JFrame {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static BaseInfoModel user = null;
 	private static LoginModel loginModel = null;
@@ -43,7 +42,8 @@ public class Login extends JFrame {
 	private static Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	/**
-	 * @throws HeadlessException
+	 * 系统登录成功后创建主界面
+	 * @throws HeadlessException 
 	 */
 	public Login() throws HeadlessException {
 		super();
@@ -53,6 +53,9 @@ public class Login extends JFrame {
 		initFrame();
 	}
 
+	/**
+	 * 初始化系统登录界面
+	 */
 	public void initFrame() {
 		
 		this.setSize(new Dimension(296, 356));

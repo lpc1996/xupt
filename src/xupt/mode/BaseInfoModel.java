@@ -18,15 +18,15 @@ public class BaseInfoModel {
 	}
 
 	/**
-	 * @param id
-	 * @param name
-	 * @param formarName
-	 * @param sex
-	 * @param age
-	 * @param nativePlace
-	 * @param iDCARDTYPE
-	 * @param iDCARDNUM
-	 * @param type
+	 * @param id 编号
+	 * @param name 姓名
+	 * @param formarName 曾用名
+	 * @param sex 性别
+	 * @param age 年龄
+	 * @param nativePlace 籍贯
+	 * @param iDCARDTYPE 证件类别
+	 * @param iDCARDNUM 证件号码
+	 * @param type 用户类型
 	 */
 	public BaseInfoModel(String id, String name, String formarName, String sex, int age, String nativePlace,
 			String iDCARDTYPE, String iDCARDNUM, String type,String tel) {
@@ -43,10 +43,18 @@ public class BaseInfoModel {
 		this.type = type;
 	}
 
+	/**
+	 * 获取编号
+	 * @return 返回ID
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * 获取姓名
+	 * @return 返回姓名
+	 */
 	public String getName() {
 		return name;
 	}

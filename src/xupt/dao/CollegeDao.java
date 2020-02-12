@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Vector;
 import xupt.mode.CollegeModel;
 
+/**
+ * @author ù‚ÏF-ﬂh∑Ω
+ *
+ */
 public class CollegeDao extends Dao {
 	
 	private final String tableName = "college";
@@ -20,11 +24,11 @@ public class CollegeDao extends Dao {
 		CollegeModel college = null;
 		try {
 			college = new CollegeModel();
-			college.setId(rs.getString("id"));
-			college.setName(rs.getString("name"));
-			college.setPresidentId(rs.getString("presidentId"));
-			college.setVicePresidentId(rs.getString("vicePresidentId"));
-			college.setInformation(rs.getString("information"));
+			college.setId(rs.getString(1));
+			college.setName(rs.getString(2));
+			college.setPresidentId(rs.getString(3));
+			college.setVicePresidentId(rs.getString(4));
+			college.setInformation(rs.getString(5));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
